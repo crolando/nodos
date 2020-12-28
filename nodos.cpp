@@ -14,6 +14,7 @@
 #include <map>
 #include <algorithm>
 #include <utility>
+#include <QDebug>
 
 
 static inline ImRect ImGui_GetItemRect()
@@ -138,6 +139,7 @@ static ImTextureID          s_HeaderBackground = nullptr;
 static ImTextureID          s_SaveIcon = nullptr;
 static ImTextureID          s_RestoreIcon = nullptr;
 
+// NodeIDLess is a custom comparitor function for the s_NodeTouchTime map.
 struct NodeIdLess
 {
     bool operator()(const ed::NodeId& lhs, const ed::NodeId& rhs) const
@@ -165,11 +167,13 @@ static ed::LinkId GetNextLinkId()
     return ed::LinkId(GetNextId());
 }
 
+// TouchNode is called during config saves
 static void TouchNode(ed::NodeId id)
 {
     s_NodeTouchTime[id] = s_TouchTime;
 }
 
+// This is used for left pane stuff
 static float GetTouchProgress(ed::NodeId id)
 {
     auto it = s_NodeTouchTime.find(id);
@@ -262,6 +266,73 @@ static bool CanCreateLink(Pin* a, Pin* b)
 //        color, rounding);
 //};
 
+// NODOS DEV ==================================================================
+// Test to enforce acyclicism
+// This is probably the first recursive function I've wrote.  That shouldn't be
+// a true statement.
+// ============================================================================
+bool isNodeAncestor(Node* Ancestor, Node* Decendent) {
+    auto decendent_inputs = Decendent->Inputs;
+
+    qDebug() << "-------------------------------------------------------";
+    qDebug() << "Testing the ancestors of: " << Decendent->Name.c_str();
+    qDebug() << "-------------------------------------------------------";
+
+    // Early return for nodes that don't have inputs
+    if(decendent_inputs.size() == 0) {
+        qDebug() << Decendent->Name.c_str() <<  " has no input on pins ... skipping";
+        return false;
+    }
+
+    // Handle nodes that have inputs.
+    for(Pin p : decendent_inputs) {
+        // Early return for unlinked pins
+        if(!IsPinLinked(p.ID)) {
+            qDebug() << p.Node->Name.c_str() <<  " has no input on pin: " << p.Name.c_str() << " ... skipping";
+            continue;
+        }
+        // Handle a linked pin.  Pins do NOT know who they are attached to.
+        // We have to search the links for the connected node.
+        std::vector<Node*> AncestorNodes;
+        for (auto& link : s_Links) {
+            if(link.EndPinID == p.ID) {
+                auto n = FindPin(link.StartPinID)->Node;
+                qDebug() << n->Name.c_str() << "Was found as an ancestor node";
+
+                if (n->ID == Ancestor->ID) {
+                    qDebug() << "Returning True because: " << n->Name.c_str() << " == " << Ancestor->Name.c_str();
+                    return true;
+                } else {
+                    AncestorNodes.push_back(n);
+                }
+            }
+        }
+
+        for(auto AncestorNode : AncestorNodes) {
+            qDebug() << "Testing " << AncestorNode->Name.c_str() << "...";
+            if(!AncestorNode) {
+                qDebug() << "Something very bad happened here";
+                return false;
+            } else {
+                if(AncestorNode->ID == Ancestor->ID) {
+                    qDebug() << "Returning True because: " << AncestorNode->Name.c_str() << " == " << Ancestor->Name.c_str();
+                    return true;
+                } else {
+                   if(isNodeAncestor(Ancestor,AncestorNode))
+                       return true;
+                } // here we let pass through!
+            qDebug() << "Got no matches under: " << AncestorNode->Name.c_str();
+            }
+        } // Done searching ancestor nodes
+    } // Done searching pins
+}
+
+
+// BuildNode exists because during Spawn**Node(), the Pins are not fully
+// constructed since the information is reflective.
+// The missing information is specifically:
+// 1. What node contains me (pin.Node)
+// 2. What pin vector contains me (pin.Kind) - this is normally input or output.
 static void BuildNode(Node* node)
 {
     for (auto& input : node->Inputs)
@@ -888,7 +959,6 @@ void Application_Frame()
 
     auto& io = ImGui::GetIO();
 
-    ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
 
     ed::SetCurrentEditor(m_Editor);
 
@@ -911,32 +981,39 @@ void Application_Frame()
     static Pin* newNodeLinkPin = nullptr;
     static Pin* newLinkPin     = nullptr;
 
-    static float leftPaneWidth  = 400.0f;
-    static float rightPaneWidth = 800.0f;
-    Splitter(true, 4.0f, &leftPaneWidth, &rightPaneWidth, 50.0f, 50.0f);
+    //static float leftPaneWidth  = 400.0f;
+    //static float rightPaneWidth = 800.0f;
+    //Splitter(true, 4.0f, &leftPaneWidth, &rightPaneWidth, 50.0f, 50.0f);
 
-    ShowLeftPane(leftPaneWidth - 4.0f);
+    //ShowLeftPane(leftPaneWidth - 4.0f);
 
-    ImGui::SameLine(0.0f, 12.0f);
+    //ImGui::SameLine(0.0f, 12.0f);
 
+    // ====================================================================================================================================
+    // NODOS DEV - Immediate Mode node drawing.
+    // ====================================================================================================================================
     ed::Begin("Node editor");
     {
         auto cursorTopLeft = ImGui::GetCursorScreenPos();
 
         util::BlueprintNodeBuilder builder(s_HeaderBackground, Application_GetTextureWidth(s_HeaderBackground), Application_GetTextureHeight(s_HeaderBackground));
 
+        // ====================================================================================================================================
+        // NODOS DEV - draw nodes of type Blueprint and Simple
+        // ====================================================================================================================================
         for (auto& node : s_Nodes)
         {
+            // Guard for non-blueprints and non-simple nodes --------------------------------------------------------
             if (node.Type != NodeType::Blueprint && node.Type != NodeType::Simple)
                 continue;
-
+            // Load isSimple
             const auto isSimple = node.Type == NodeType::Simple;
 
             bool hasOutputDelegates = false;
             for (auto& output : node.Outputs)
                 if (output.Type == PinType::Delegate)
                     hasOutputDelegates = true;
-
+            // Build header, which can include delegates (header output pin) --------------------------------------------------------
             builder.Begin(node.ID);
                 if (!isSimple)
                 {
@@ -985,6 +1062,7 @@ void Application_Frame()
                     builder.EndHeader();
                 }
 
+                // Build node inputs, including pin names.  note "bool" type has button hard-coded.--------------------------------------------------------
                 for (auto& input : node.Inputs)
                 {
                     auto alpha = ImGui::GetStyle().Alpha;
@@ -1009,6 +1087,8 @@ void Application_Frame()
                     builder.EndInput();
                 }
 
+                // Optional "middle" part.  Used in simple blueprints only.--------------------------------------------------------
+                // "For simple blueprints, has the node name in the center."
                 if (isSimple)
                 {
                     builder.Middle();
@@ -1018,8 +1098,11 @@ void Application_Frame()
                     ImGui::Spring(1, 0);
                 }
 
+                // output column.
+                // DEV - experiment to have buffers be owned by individual nodes --------------------------------------------------------
                 for (auto& output : node.Outputs)
                 {
+                    //
                     if (!isSimple && output.Type == PinType::Delegate)
                         continue;
 
@@ -1062,7 +1145,9 @@ void Application_Frame()
 
             builder.End();
         }
-
+        // ====================================================================================================================================
+        // NODOS DEV - draw nodes of type Tree
+        // ====================================================================================================================================
         for (auto& node : s_Nodes)
         {
             if (node.Type != NodeType::Tree)
@@ -1200,6 +1285,9 @@ void Application_Frame()
             //ImGui::PopStyleVar();
         }
 
+        // ====================================================================================================================================
+        // NODOS DEV - draw nodes of type Houdini
+        // ====================================================================================================================================
         for (auto& node : s_Nodes)
         {
             if (node.Type != NodeType::Houdini)
@@ -1356,7 +1444,9 @@ void Application_Frame()
             //    IM_COL32(48, 128, 255, 100), 0.0f);
             //ImGui::PopStyleVar();
         }
-
+        // ====================================================================================================================================
+        // NODOS DEV - draw nodes of type Comment
+        // ====================================================================================================================================
         for (auto& node : s_Nodes)
         {
             if (node.Type != NodeType::Comment)
@@ -1416,14 +1506,28 @@ void Application_Frame()
             }
             ed::EndGroupHint();
         }
-
+        // ====================================================================================================================================
+        // NODOS DEV - draw links
+        // ====================================================================================================================================
         for (auto& link : s_Links)
             ed::Link(link.ID, link.StartPinID, link.EndPinID, link.Color, 2.0f);
 
+        // ====================================================================================================================================
+        // NODOS DEV - Graph interactions in immediate mode.
+        // BeginCreate() - Handle dragging a link out of a pin
+        //     QueryNewLink()
+        //         AcceptNewItem()
+        //         RejectNewItem()
+        //     QueryNewNode(PinId* pinId, const ImVec4& color, float thickness)
+        //         AcceptNewItem()
+        //         RejectNewItem()
+        // EndCreate()
+        // ====================================================================================================================================
         if (!createNewNode)
         {
             if (ed::BeginCreate(ImColor(255, 255, 255), 2.0f))
             {
+                // function declaration to show labels ---------------------------------------------
                 auto showLabel = [](const char* label, ImColor color)
                 {
                     ImGui::SetCursorPosY(ImGui::GetCursorPosY() - ImGui::GetTextLineHeight());
@@ -1442,12 +1546,16 @@ void Application_Frame()
                     ImGui::TextUnformatted(label);
                 };
 
+                // QueryNewLink is true when you've started dragging off a pin, and you're now hovering over a pin
+                // This does fire right off the bat typically, as you're over the pin you just dragged off of.
+                // QueryNewLink populates its arguments with the pin ids, then you can figure out if you
+                // will allow the connection.  It
                 ed::PinId startPinId = 0, endPinId = 0;
                 if (ed::QueryNewLink(&startPinId, &endPinId))
                 {
                     auto startPin = FindPin(startPinId);
                     auto endPin   = FindPin(endPinId);
-
+                    //qDebug() << startPin->ID.Get() << " " << endPin->ID.Get() ;
                     newLinkPin = startPin ? startPin : endPin;
 
                     if (startPin->Kind == PinKind::Input)
@@ -1456,10 +1564,21 @@ void Application_Frame()
                         std::swap(startPinId, endPinId);
                     }
 
+                    // Startpin node should never connect to an ancestor end-pin
+                    auto startNode = startPin->Node;
+                    auto endNode = endPin->Node;
+
+
+
+
                     if (startPin && endPin)
                     {
                         if (endPin == startPin)
                         {
+                            ed::RejectNewItem(ImColor(255, 0, 0), 2.0f);
+                        }
+                        else if (isNodeAncestor(endNode,startNode)){
+                            showLabel("x Connection would create a loop", ImColor(45, 32, 32, 180));
                             ed::RejectNewItem(ImColor(255, 0, 0), 2.0f);
                         }
                         else if (endPin->Kind == startPin->Kind)
@@ -1467,11 +1586,11 @@ void Application_Frame()
                             showLabel("x Incompatible Pin Kind", ImColor(45, 32, 32, 180));
                             ed::RejectNewItem(ImColor(255, 0, 0), 2.0f);
                         }
-                        //else if (endPin->Node == startPin->Node)
-                        //{
-                        //    showLabel("x Cannot connect to self", ImColor(45, 32, 32, 180));
-                        //    ed::RejectNewItem(ImColor(255, 0, 0), 1.0f);
-                        //}
+                        else if (endPin->Node == startPin->Node)
+                        {
+                            showLabel("x Cannot connect to self", ImColor(45, 32, 32, 180));
+                            ed::RejectNewItem(ImColor(255, 0, 0), 1.0f);
+                        }
                         else if (endPin->Type != startPin->Type)
                         {
                             showLabel("x Incompatible Pin Type", ImColor(45, 32, 32, 180));
