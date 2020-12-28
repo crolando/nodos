@@ -595,6 +595,12 @@ void Application_Initialize()
     m_Editor = ed::CreateEditor(&config);
     ed::SetCurrentEditor(m_Editor);
 
+    // ====================================================================================================================================
+    // NODOS DEV - populate graph with nodes.  This should happen on project loads.
+    // The SPAWN *** calls don't fill out the reflective pin's members.  After these calls, you have to call
+    // BuildNodes();
+    // ====================================================================================================================================
+
     Node* node;
     node = SpawnInputActionNode();      ed::SetNodePosition(node->ID, ImVec2(-252, 220));
     node = SpawnBranchNode();           ed::SetNodePosition(node->ID, ImVec2(-300, 351));
@@ -959,6 +965,7 @@ void Application_Frame()
 
     auto& io = ImGui::GetIO();
 
+    //ImGui::Text("FPS: %.2f (%.2gms)", io.Framerate, io.Framerate ? 1000.0f / io.Framerate : 0.0f);
 
     ed::SetCurrentEditor(m_Editor);
 
