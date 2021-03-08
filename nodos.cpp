@@ -253,6 +253,31 @@ const char* Application_GetName()
 
 void Application_Initialize()
 {
+    // NODOS DEV ===================================================
+    // Config is what this system calls a mechanism to move node-related data to and from
+    // users (nodos) and the backend (imgui_node_editor).
+    //
+    // The "save" callbacks are called whenever anything changes that config data.
+    // so it will happen constantly throughout use.  Happens for new nodes
+    //
+    // The "load" callbacks are called if the backend encounters a new node ID for the first time
+    // while handling most calls, including BeginNode and CreateNode.  When you're making
+    // a new node during runtime, your load callback must say there is no data.
+    //
+    // So this is how config shit is handled:
+    // If there's a LoadSettings and SaveSettings callback, then it doesn't use json files.
+    // Else, it uses the SettingsFile.
+    //
+    // When implementing the LoadSettings and SaveSettings, you have to pass the sizeT back.
+    // It will get called twice - once to probe the size, and then once to load the
+    // pointer.  So you will need to check if data is null before putting shit into it.
+    //
+    // imgui_node_editor.cpp  ->  std::string ed::Config::Load()
+    // if LoadSettings callback exists...
+    // Call it first with a nullpointer to get the size.
+    // if it's non-zero, then call it a second time passing a correctly sized buffer.
+
+
     ed::Config config;
 
     config.SettingsFile = "Blueprints.json";
@@ -288,29 +313,31 @@ void Application_Initialize()
     // NODOS DEV - populate graph with nodes.  This should happen on project loads.
     // The SPAWN *** calls don't fill out the reflective pin's members.  After these calls, you have to call
     // BuildNodes();
+    //
+    // The ed::SetNodePosition() Call shouldn't be used like this because it keeps the node
+    // position from deserializing correctly
     // ====================================================================================================================================
 
     Node* node;
-    node = SpawnInputActionNode(s_Nodes);      ed::SetNodePosition(node->ID, ImVec2(-252, 220));
-    node = SpawnBranchNode(s_Nodes);           ed::SetNodePosition(node->ID, ImVec2(-300, 351));
-    node = SpawnDoNNode(s_Nodes);              ed::SetNodePosition(node->ID, ImVec2(-238, 504));
-    node = SpawnOutputActionNode(s_Nodes);     ed::SetNodePosition(node->ID, ImVec2(71, 80));
-    node = SpawnSetTimerNode(s_Nodes);         ed::SetNodePosition(node->ID, ImVec2(168, 316));
+    node = SpawnInputActionNode(s_Nodes);
+    node = SpawnBranchNode(s_Nodes);
+    node = SpawnDoNNode(s_Nodes);
+    node = SpawnOutputActionNode(s_Nodes);
+    node = SpawnSetTimerNode(s_Nodes);
 
-    node = SpawnTreeSequenceNode(s_Nodes);     ed::SetNodePosition(node->ID, ImVec2(1028, 329));
-    node = SpawnTreeTaskNode(s_Nodes);         ed::SetNodePosition(node->ID, ImVec2(1204, 458));
-    node = SpawnTreeTask2Node(s_Nodes);        ed::SetNodePosition(node->ID, ImVec2(868, 538));
+    node = SpawnTreeSequenceNode(s_Nodes);
+    node = SpawnTreeTaskNode(s_Nodes);
+    node = SpawnTreeTask2Node(s_Nodes);
 
-    node = SpawnComment(s_Nodes);              ed::SetNodePosition(node->ID, ImVec2(112, 576));
-    node = SpawnComment(s_Nodes);              ed::SetNodePosition(node->ID, ImVec2(800, 224));
+    node = SpawnComment(s_Nodes);
+    node = SpawnComment(s_Nodes);
+    node = SpawnLessNode(s_Nodes);
+    node = SpawnWeirdNode(s_Nodes);
+    node = SpawnMessageNode(s_Nodes);
+    node = SpawnPrintStringNode(s_Nodes);
 
-    node = SpawnLessNode(s_Nodes);             ed::SetNodePosition(node->ID, ImVec2(366, 652));
-    node = SpawnWeirdNode(s_Nodes);            ed::SetNodePosition(node->ID, ImVec2(144, 652));
-    node = SpawnMessageNode(s_Nodes);          ed::SetNodePosition(node->ID, ImVec2(-348, 698));
-    node = SpawnPrintStringNode(s_Nodes);      ed::SetNodePosition(node->ID, ImVec2(-69, 652));
-
-    node = SpawnHoudiniTransformNode(s_Nodes); ed::SetNodePosition(node->ID, ImVec2(500, -70));
-    node = SpawnHoudiniGroupNode(s_Nodes);     ed::SetNodePosition(node->ID, ImVec2(500, 42));
+    node = SpawnHoudiniTransformNode(s_Nodes);
+    node = SpawnHoudiniGroupNode(s_Nodes);
 
     ed::NavigateToContent();
 
