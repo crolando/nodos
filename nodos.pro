@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    example_node_spawner.cpp \
+    node_utils.cpp \
     nodos.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.cpp \
@@ -54,7 +56,11 @@ HEADERS += \
     ../qtimgui/QtImGui.h \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
-    ../qt-imgui-nodes/mainwindow.h
+    ../qt-imgui-nodes/mainwindow.h \
+    example_node_spawner.h \
+    node_utils.h \
+    nodos.h \
+    nodos_session_data.h
 
 FORMS += \
     ../qt-imgui-nodes/mainwindow.ui
