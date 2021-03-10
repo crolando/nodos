@@ -19,9 +19,12 @@
 #include <algorithm>
 #include <utility>
 #include <QDebug>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
-
-// Session data
+// Session data (from examples)
 static const int            s_PinIconSize = 24;
 static std::vector<Node>    s_Nodes;
 static std::vector<Link>    s_Links;
@@ -31,6 +34,9 @@ static ImTextureID          s_SaveIcon = nullptr;
 static ImTextureID          s_RestoreIcon = nullptr;
 static const float          s_TouchTime = 1.0f;
 static std::map<ed::NodeId, float, NodeIdLess> s_NodeTouchTime;
+
+// Nodos session data
+nodos_session_data session_data;
 
 void BuildNodes()
 {
@@ -277,10 +283,30 @@ void Application_Initialize()
     // Call it first with a nullpointer to get the size.
     // if it's non-zero, then call it a second time passing a correctly sized buffer.
 
-
+    // Config structure holds callsbacks for backend-frontend serialization transactions.
     ed::Config config;
 
-    config.SettingsFile = "Blueprints.json";
+    config.SaveSettings = [](const char* data, size_t size, ax::NodeEditor::SaveReasonFlags reason, void* userPointer) -> bool
+    {
+        session_data.node_editor_blueprint_data.reserve(size); //maybe not needed
+        session_data.node_editor_blueprint_data.assign(data);
+        std::ofstream out("project.txt");
+        out << session_data.node_editor_blueprint_data;
+        return true;
+    };
+
+    config.LoadSettings = [](char* data, void* userPointer)->size_t {
+        std::ifstream in("project.txt");
+        std::stringstream b;
+        b << in.rdbuf();
+        session_data.node_editor_blueprint_data = b.str();
+
+        size_t size = session_data.node_editor_blueprint_data.size();
+        if(data) {
+            memcpy(data,session_data.node_editor_blueprint_data.c_str(),size);
+        }
+        return size;
+    };
 
     config.LoadNodeSettings = [](ed::NodeId nodeId, char* data, void* userPointer) -> size_t
     {
