@@ -8,6 +8,8 @@
 #include <example_node_spawner.h>
 #include <node_utils.h> // gedNextID, BuildNode, BuildNodes
 
+#include <example_property_im_draw.h>
+
 #include <nodos.h>
 #include <nodos_session_data.h>
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -847,6 +849,7 @@ void Application_Frame()
 
                 // Optional "middle" part.  Used in simple blueprints only.--------------------------------------------------------
                 // "For simple blueprints, has the node name in the center."
+                // But for others, it draws the properties... stuff
                 if (isSimple)
                 {
                     builder.Middle();
@@ -854,6 +857,9 @@ void Application_Frame()
                     ImGui::Spring(1, 0);
                     ImGui::TextUnformatted(node.Name.c_str());
                     ImGui::Spring(1, 0);
+                } else {
+                    builder.Middle();
+                    im_draw_basic_widgets();
                 }
 
                 // output column.
@@ -900,7 +906,6 @@ void Application_Frame()
                     ImGui::PopStyleVar();
                     builder.EndOutput();
                 }
-
             builder.End();
         }
         // ====================================================================================================================================

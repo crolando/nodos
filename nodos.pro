@@ -59,6 +59,7 @@ HEADERS += \
     ../qt-imgui-nodes/mainwindow.h \
     attribute.h \
     example_node_spawner.h \
+    example_property_im_draw.h \
     node_utils.h \
     nodos.h \
     nodos_session_data.h
