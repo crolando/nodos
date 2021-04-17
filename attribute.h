@@ -31,9 +31,18 @@ public:
         t = inumber;
     }
 
-    void set(const attr_string& value) {s = value;}
-    void set(const double value) {f = value;};
-    void set(const long value) {f = value;};
+    void set(const attr_string& value) {
+        s = value;
+        t = string;
+        }
+    void set(const double value) {
+        f = value;
+        t = fnumber;
+    };
+    void set(const long value) {
+        i = value;
+        t = inumber;
+    };
 
     attr_type get_type(void) {return t;};
     attr_string& get_string(void) {return s;};
@@ -67,7 +76,7 @@ public:
         }
     }
 
-    void set_attr(const attr_name& Key, attr_fnumber& Value) {
+    void set_attr(const attr_name& Key, attr_fnumber Value) {
         if(has_attr(Key) == false) {
             table[Key] = attr_value(Value);
         } else {
@@ -75,15 +84,16 @@ public:
         }
     }
 
-    void set_attr(const attr_name& Key, attr_inumber& Value) {
+    void set_attr(const attr_name& Key, attr_inumber Value) {
         if(has_attr(Key) == false) {
             table[Key] = attr_value(Value);
         } else {
             table[Key].set(Value);
+
         }
     }
 
-    const attr_value& get_attr(const attr_name& Key) {
+    attr_value& get_attr(const attr_name& Key) {
         return table[Key];
     }
 
