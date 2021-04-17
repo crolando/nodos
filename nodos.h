@@ -66,8 +66,8 @@ struct Node
     NodeType Type;
     ImVec2 Size;
 
-    std::string State;
-    std::string SavedState;
+    std::string State;      // State is buffer to store the backend's node specific data between frames, basically.  It mostly stores the node's position.
+    std::string SavedState; // SavedState is only used in the leftpanel, so we can delete it if you want.
 
     Node(int id, const char* name, ImColor color = ImColor(255, 255, 255)):
         ID(id), Name(name), Color(color), Type(NodeType::Blueprint), Size(0, 0)
