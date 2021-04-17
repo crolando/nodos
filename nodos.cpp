@@ -24,20 +24,29 @@
 #include <iostream>
 #include <sstream>
 
-// Session data (from examples)
 static const int            s_PinIconSize = 24;
-static std::vector<Node>    s_Nodes;
-static std::vector<Link>    s_Links;
+
+
+static std::vector<Node>    s_Nodes;   // Session Nodes - there is an ID that is important
+static std::vector<Link>    s_Links;   // Session Links - there is an ID that is important
+
+// Backend populates this with node position data.  save it directly to your "project file"
+// It's sort of private to the backend, so just let it serailze/deserialze and it should work.
+// The this data hooks up to the s_Nodes and s_Links vectors based on the node.ID and link.ID.
+static std::string          s_BlueprintData;
+
 static ImTextureID          s_HeaderBackground = nullptr;
-//static ImTextureID          s_SampleImage = nullptr;
+static ImTextureID          s_SampleImage = nullptr;
 static ImTextureID          s_SaveIcon = nullptr;
 static ImTextureID          s_RestoreIcon = nullptr;
 static const float          s_TouchTime = 1.0f;
+
+// Not sure what this is, but I think it is a way to determine if the node is dirty based on the last 'time'
+// it was messed with.  Verify this at some point, won't you?
 static std::map<ed::NodeId, float, NodeIdLess> s_NodeTouchTime;
 
-// Nodos session data
-nodos_session_data session_data;
-
+// Nodes and links are reflective - they know about each other.  This enforces this convention after construction
+// and attaching those objects.  Having reflective data lets you query a link and get what node owns it.
 void BuildNodes()
 {
     for (auto& node : s_Nodes)
@@ -288,10 +297,10 @@ void Application_Initialize()
 
     config.SaveSettings = [](const char* data, size_t size, ax::NodeEditor::SaveReasonFlags reason, void* userPointer) -> bool
     {
-        session_data.node_editor_blueprint_data.reserve(size); //maybe not needed
-        session_data.node_editor_blueprint_data.assign(data);
+        s_BlueprintData.reserve(size); //maybe not needed
+        s_BlueprintData.assign(data);
         std::ofstream out("project.txt");
-        out << session_data.node_editor_blueprint_data;
+        out << s_BlueprintData;
         return true;
     };
 
@@ -299,11 +308,11 @@ void Application_Initialize()
         std::ifstream in("project.txt");
         std::stringstream b;
         b << in.rdbuf();
-        session_data.node_editor_blueprint_data = b.str();
+        s_BlueprintData = b.str();
 
-        size_t size = session_data.node_editor_blueprint_data.size();
+        size_t size = s_BlueprintData.size();
         if(data) {
-            memcpy(data,session_data.node_editor_blueprint_data.c_str(),size);
+            memcpy(data,s_BlueprintData.c_str(),size);
         }
         return size;
     };
