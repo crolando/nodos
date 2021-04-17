@@ -57,6 +57,7 @@ HEADERS += \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
     ../qt-imgui-nodes/mainwindow.h \
+    attribute.h \
     example_node_spawner.h \
     node_utils.h \
     nodos.h \
