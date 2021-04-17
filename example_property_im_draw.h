@@ -3,6 +3,7 @@
 
 #include <nodos.h>
 #include <imgui.h>
+#include <imgui_stdlib.h>
 
 
 void im_draw_basic_widgets (attr_table& Properties) {
@@ -14,6 +15,12 @@ void im_draw_basic_widgets (attr_table& Properties) {
     // This should be avaialbe outside this function because node instantiation would populate the default attributes.
     if (! Properties.has_attr("button")) {
         Properties.set_attr("button",0L);
+        Properties.set_attr("check",0L);
+        Properties.set_attr("e",0L);
+        Properties.set_attr("counter",0L);
+        Properties.set_attr("f0",0.001);
+        Properties.set_attr("f1",0.06);
+        Properties.set_attr("f1",0.333);
     }
 
     // Widget Demo from imgui_demo.cpp...
@@ -27,14 +34,16 @@ void im_draw_basic_widgets (attr_table& Properties) {
     ImGui::Text("Times Clicked: %u", button);
 
     // Checkbox
-    static bool check = true;
+    auto check = (bool)Properties.get_attr("check").get_integer();
     ImGui::Checkbox("checkbox", &check);
+    Properties.set_attr("check",(long)check);
 
     // Radio buttons
-    static int e = 0;
+    int e = Properties.get_attr("e").get_integer();
     ImGui::RadioButton("radio a", &e, 0); ImGui::SameLine();
     ImGui::RadioButton("radio b", &e, 1); ImGui::SameLine();
     ImGui::RadioButton("radio c", &e, 2);
+    Properties.set_attr("e",(long)e);
 
     // Color buttons, demonstrate using PushID() to add unique identifier in the ID stack, and changing style.
     for (int i = 0; i < 7; i++)
@@ -56,7 +65,7 @@ void im_draw_basic_widgets (attr_table& Properties) {
     ImGui::SameLine();
 
     // Arrow buttons with Repeater
-    static int counter = 0;
+    int counter = Properties.get_attr("counter").get_integer();
     float spacing = ImGui::GetStyle().ItemInnerSpacing.x;
     ImGui::PushButtonRepeat(true);
     if (ImGui::ArrowButton("##left", ImGuiDir_Left)) { counter--; }
@@ -65,21 +74,30 @@ void im_draw_basic_widgets (attr_table& Properties) {
     ImGui::PopButtonRepeat();
     ImGui::SameLine();
     ImGui::Text("%d", counter);
+    Properties.set_attr("counter",(long)counter);
 
     // The input widgets also require you to manually disable the editor shortcuts so the view doesn't fly around.
     // (note that this is a per-frame setting, so it disables it for all text boxes.  I left it here so you could find it!)
     ed::EnableShortcuts(ImGui::GetIO().WantTextInput);
     // The input widgets require some guidance on their widths, or else they're very large. (note matching pop at the end).
     ImGui::PushItemWidth(200);
-    static char str1[128] = "";
-    ImGui::InputTextWithHint("input text (w/ hint)", "enter text here", str1, IM_ARRAYSIZE(str1));
+    auto str1 = Properties.get_attr("strl").get_string();
+    ImGui::InputTextWithHint("input text (w/ hint)", "enter text here", &str1);
+    Properties.set_attr("strl",str1);
 
-    static float f0 = 0.001f;
+    float f0 = Properties.get_attr("f0").get_float();
     ImGui::InputFloat("input float", &f0, 0.01f, 1.0f, "%.3f");
+    Properties.set_attr("f0",f0);
 
-    static float f1 = 1.00f, f2 = 0.0067f;
+    float f1 = Properties.get_attr("f1").get_float();
+
     ImGui::DragFloat("drag float", &f1, 0.005f);
+    Properties.set_attr("f1",f1);
+    float f2 = Properties.get_attr("f2").get_float();
+
     ImGui::DragFloat("drag small float", &f2, 0.0001f, 0.0f, 0.0f, "%.06f ns");
+    Properties.set_attr("f2",f2);
+
     ImGui::PopItemWidth();
 }
 
