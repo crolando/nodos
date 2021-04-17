@@ -859,7 +859,7 @@ void Application_Frame()
                     ImGui::Spring(1, 0);
                 } else {
                     builder.Middle();
-                    im_draw_basic_widgets();
+                    im_draw_basic_widgets(node.Properties);
                 }
 
                 // output column.

@@ -1,28 +1,30 @@
 #ifndef EXAMPLE_PROPERTY_IM_DRAW_H
 #define EXAMPLE_PROPERTY_IM_DRAW_H
 
-
+#include <nodos.h>
 #include <imgui.h>
 
 
-void im_draw_basic_widgets () {
-    int uniqueId = 1;
-
+void im_draw_basic_widgets (attr_table& Properties) {
 
     // Basic Widgets Demo  ==============================================================================================
-    auto basic_id = uniqueId++;
     ImGui::Text("Basic Widget Demo");
+
+    // This is a crutch for now to get the default properties in the node because we don't have property serialization.
+    // This should be avaialbe outside this function because node instantiation would populate the default attributes.
+    if (! Properties.has_attr("button")) {
+        Properties.set_attr("button",0L);
+    }
 
     // Widget Demo from imgui_demo.cpp...
     // Normal Button
-    static int clicked = 0;
-    if (ImGui::Button("Button"))
-        clicked++;
-    if (clicked & 1)
-    {
-        ImGui::SameLine();
-        ImGui::Text("Thanks for clicking me!");
+    auto button = Properties.get_attr("button").get_integer();
+    if (ImGui::Button("Button")) {
+        button++;
+        Properties.set_attr("button",button);
     }
+    ImGui::SameLine();
+    ImGui::Text("Times Clicked: %u", button);
 
     // Checkbox
     static bool check = true;
