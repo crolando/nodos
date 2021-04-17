@@ -4,7 +4,7 @@
 // Types Section ==============================================================
 #include <widgets.h>
 #include <builders.h>
-
+#include <attribute.h>
 #include <string>
 #include <vector>
 #include <map>
@@ -62,6 +62,7 @@ struct Node
     std::string Name;
     std::vector<Pin> Inputs;
     std::vector<Pin> Outputs;
+    attr_table  Properties;
     ImColor Color;
     NodeType Type;
     ImVec2 Size;
