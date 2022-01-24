@@ -19,6 +19,7 @@ SOURCES += \
     example_node_spawner.cpp \
     node_utils.cpp \
     nodos.cpp \
+    imgui_stdlib.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/widgets.cpp \
@@ -30,8 +31,8 @@ SOURCES += \
     ../imgui-node-editor/external/imgui/imgui_demo.cpp \
     ../imgui-node-editor/external/imgui/imgui_draw.cpp \
     ../imgui-node-editor/external/imgui/imgui_widgets.cpp \
-    ../qtimgui/ImGuiRenderer.cpp \
-    ../qtimgui/QtImGui.cpp \
+    ../qtimgui/src/ImGuiRenderer.cpp \
+    ../qtimgui/src/QtImGui.cpp \
     ../qt-imgui-nodes/NodosWidget.cpp \
     ../qt-imgui-nodes/main.cpp \
     ../qt-imgui-nodes/mainwindow.cpp \
@@ -52,8 +53,8 @@ HEADERS += \
     ../imgui-node-editor/NodeEditor/Source/imgui_node_editor_internal.h \
     ../imgui-node-editor/NodeEditor/Source/imgui_node_editor_internal.inl \
     ../imgui-node-editor/external/imgui/imgui.h \
-    ../qtimgui/ImGuiRenderer.h \
-    ../qtimgui/QtImGui.h \
+    ../qtimgui/src/ImGuiRenderer.h \
+    ../qtimgui/src/QtImGui.h \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
     ../qt-imgui-nodes/mainwindow.h \
@@ -64,6 +65,8 @@ HEADERS += \
     nodos.h \
     nodos_session_data.h
 
+    imgui_stdlib.h
+
 FORMS += \
     ../qt-imgui-nodes/mainwindow.ui
 
@@ -71,7 +74,7 @@ INCLUDEPATH += \
     ../qt-imgui-nodes \
     ../imgui-node-editor \
     ../imgui-node-editor/external/imgui \
-    ../qtimgui \
+    ../qtimgui/src \
     ../imgui-node-editor/examples/application/include \
     ../imgui-node-editor/examples/Common/Application/Include \
     ../imgui-node-editor/examples/blueprints-example/utilities \
