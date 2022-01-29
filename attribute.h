@@ -2,6 +2,7 @@
 #define ATTRIBUTE_H
 
 #include <string>
+#include <sstream>
 #include <map>
 
 typedef std::string attr_name;
@@ -48,11 +49,27 @@ public:
     attr_string& get_string(void) {return s;};
     attr_fnumber get_float(void) {return f;};
     attr_inumber get_integer(void) {return i;};
+    std::string get_serial_value(attr_type& type) const {
+        switch (t) {
+            case attr_type::string:
+                type = attr_type::string;
+                return s;
+                break;
+            case attr_type::fnumber:
+                type = attr_type::fnumber;
+                return std::to_string(f);
+                break;
+            case attr_type::inumber:
+                type = attr_type::inumber;
+                return std::to_string(i);
+                break;
+            }
+    }
 private:
     attr_type       t;
     attr_string     s;
     attr_fnumber    f = 0.0;
-    attr_inumber    i = 0;
+    attr_inumber    i = 0;    
 };
 
 class attr_table {
@@ -95,6 +112,52 @@ public:
 
     attr_value& get_attr(const attr_name& Key) {
         return table[Key];
+    }
+
+    std::string serialize() {
+        std::string seralization;
+        attr_type attribute_type;
+        for (const auto& kv : table) {
+            seralization.append(kv.first);
+            seralization.append("\n");
+            seralization.append(kv.second.get_serial_value(attribute_type));
+            seralization.append("\n");
+            switch(attribute_type) {
+                case attr_type::string :
+                    seralization.append("s\n");
+                    break;
+                case attr_type::fnumber:
+                    seralization.append("f\n");
+                    break;
+                case attr_type::inumber:
+                    seralization.append("i\n");
+                    break;
+            }
+        }
+        return seralization;
+    }
+
+    void deseralize(const std::string& serialized_table) {
+        table.clear();
+        if(serialized_table.size() == 0)
+            return;
+
+        std::istringstream iss(serialized_table);
+        std::string line1, line2, line3;
+
+
+
+        for(int line_num = 0; std::getline(iss,line1); line_num +=3) {
+            std::getline(iss,line2);
+            std::getline(iss,line3);
+            if (line3.at(0) == 's') {
+                set_attr(line1,line2);
+            } else if (line3.at(0) == 'f') {
+                set_attr(line1,std::stod(line2));
+            } else {
+                set_attr(line1,std::stol(line2));
+            }
+        }
     }
 
 

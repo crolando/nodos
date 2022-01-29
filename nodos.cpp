@@ -389,6 +389,16 @@ void Application_Initialize()
     s_SaveIcon         = Application_LoadTexture("Data/ic_save_white_24dp.png");
     s_RestoreIcon      = Application_LoadTexture("Data/ic_restore_white_24dp.png");
 
+    // Extremely bad deserialization system
+    for (unsigned long long id = 0; id < s_Nodes.size(); id++)
+    {
+        std::ifstream inf(std::to_string(id) + "_node_properties.txt");
+        std::stringstream in;
+        in << inf.rdbuf();
+        std::string serial_properties(in.str());
+
+        s_Nodes[id].Properties.deseralize(serial_properties);
+    }
 
     //auto& io = ImGui::GetIO();
 }
@@ -407,6 +417,14 @@ void Application_Finalize()
     releaseTexture(s_RestoreIcon);
     releaseTexture(s_SaveIcon);
     releaseTexture(s_HeaderBackground);
+
+    // Extremely bad serilzation system
+    //for (auto& node : s_Nodes)
+    for (unsigned long long id = 0; id < s_Nodes.size(); id++)
+    {
+        std::ofstream out(std::to_string(id) + "_node_properties.txt");
+        out << s_Nodes[id].Properties.serialize();
+    }
 
     if (m_Editor)
     {
