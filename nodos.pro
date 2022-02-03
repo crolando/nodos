@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     example_node_spawner.cpp \
+    node_defs/import_animal.h \
     node_utils.cpp \
     nodos.cpp \
     imgui_stdlib.cpp \
@@ -39,7 +40,7 @@ SOURCES += \
     ../qt-imgui-nodes/texture_manager.cpp
 
 HEADERS += \
-    ../qt-imgui-nodes/application.h \
+    node.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing..h \
     ../imgui-node-editor/examples/blueprints-example/utilities/widgets.h \

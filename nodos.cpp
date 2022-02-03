@@ -26,6 +26,15 @@
 #include <iostream>
 #include <sstream>
 
+
+
+// Include your "user created node definitions"
+#include <node_defs\import_animal.h>
+
+// One day, this will be the mononlithic container for all these static vars.
+nodos_session_data NodosSession;
+
+
 static const int            s_PinIconSize = 24;
 
 
@@ -270,6 +279,11 @@ const char* Application_GetName()
 
 void Application_Initialize()
 {
+
+    // NODOS DEV ===================================================
+    // Register nodes from the user's node description forms.    
+    NodosSession.RegisterNewNode(node_defs::import_animal::ConstructDefinition());
+
     // NODOS DEV ===================================================
     // Config is what this system calls a mechanism to move node-related data to and from
     // users (nodos) and the backend (imgui_node_editor).
@@ -388,6 +402,11 @@ void Application_Initialize()
     s_HeaderBackground = Application_LoadTexture("Data/BlueprintBackground.png");
     s_SaveIcon         = Application_LoadTexture("Data/ic_save_white_24dp.png");
     s_RestoreIcon      = Application_LoadTexture("Data/ic_restore_white_24dp.png");
+
+
+
+
+
 
     // Extremely bad deserialization system
     for (unsigned long long id = 0; id < s_Nodes.size(); id++)
