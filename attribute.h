@@ -93,6 +93,16 @@ public:
         }
     }
 
+    // For ease of initialization
+    void set_attr(const attr_name& Key, const char* Value) {
+        if(has_attr(Key) == false) {
+            table[Key] = attr_value(Value);
+        } else {
+            table[Key].set(Value);
+        }
+    }
+
+
     void set_attr(const attr_name& Key, attr_fnumber Value) {
         if(has_attr(Key) == false) {
             table[Key] = attr_value(Value);

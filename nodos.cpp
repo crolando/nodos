@@ -369,35 +369,35 @@ void Application_Initialize()
     // position from deserializing correctly
     // ====================================================================================================================================
 
-    Node* node;
-    node = SpawnInputActionNode(s_Nodes);
-    node = SpawnBranchNode(s_Nodes);
-    node = SpawnDoNNode(s_Nodes);
-    node = SpawnOutputActionNode(s_Nodes);
-    node = SpawnSetTimerNode(s_Nodes);
-
-    node = SpawnTreeSequenceNode(s_Nodes);
-    node = SpawnTreeTaskNode(s_Nodes);
-    node = SpawnTreeTask2Node(s_Nodes);
-
-    node = SpawnComment(s_Nodes);
-    node = SpawnComment(s_Nodes);
-    node = SpawnLessNode(s_Nodes);
-    node = SpawnWeirdNode(s_Nodes);
-    node = SpawnMessageNode(s_Nodes);
-    node = SpawnPrintStringNode(s_Nodes);
-
-    node = SpawnHoudiniTransformNode(s_Nodes);
-    node = SpawnHoudiniGroupNode(s_Nodes);
-
-    ed::NavigateToContent();
-
-    BuildNodes();
-
-    s_Links.push_back(Link(GetNextLinkId(), s_Nodes[5].Outputs[0].ID, s_Nodes[6].Inputs[0].ID));
-    s_Links.push_back(Link(GetNextLinkId(), s_Nodes[5].Outputs[0].ID, s_Nodes[7].Inputs[0].ID));
-
-    s_Links.push_back(Link(GetNextLinkId(), s_Nodes[14].Outputs[0].ID, s_Nodes[15].Inputs[0].ID));
+    //Node* node;
+    //node = SpawnInputActionNode(s_Nodes);
+    //node = SpawnBranchNode(s_Nodes);
+    //node = SpawnDoNNode(s_Nodes);
+    //node = SpawnOutputActionNode(s_Nodes);
+    //node = SpawnSetTimerNode(s_Nodes);
+    //
+    //node = SpawnTreeSequenceNode(s_Nodes);
+    //node = SpawnTreeTaskNode(s_Nodes);
+    //node = SpawnTreeTask2Node(s_Nodes);
+    //
+    //node = SpawnComment(s_Nodes);
+    //node = SpawnComment(s_Nodes);
+    //node = SpawnLessNode(s_Nodes);
+    //node = SpawnWeirdNode(s_Nodes);
+    //node = SpawnMessageNode(s_Nodes);
+    //node = SpawnPrintStringNode(s_Nodes);
+    //
+    //node = SpawnHoudiniTransformNode(s_Nodes);
+    //node = SpawnHoudiniGroupNode(s_Nodes);
+    //
+    //ed::NavigateToContent();
+    //
+    //BuildNodes();
+    //
+    //s_Links.push_back(Link(GetNextLinkId(), s_Nodes[5].Outputs[0].ID, s_Nodes[6].Inputs[0].ID));
+    //s_Links.push_back(Link(GetNextLinkId(), s_Nodes[5].Outputs[0].ID, s_Nodes[7].Inputs[0].ID));
+    //
+    //s_Links.push_back(Link(GetNextLinkId(), s_Nodes[14].Outputs[0].ID, s_Nodes[15].Inputs[0].ID));
 
     s_HeaderBackground = Application_LoadTexture("Data/BlueprintBackground.png");
     s_SaveIcon         = Application_LoadTexture("Data/ic_save_white_24dp.png");
@@ -895,8 +895,12 @@ void Application_Frame()
                     ImGui::TextUnformatted(node.Name.c_str());
                     ImGui::Spring(1, 0);
                 } else {
-                    builder.Middle();
-                    im_draw_basic_widgets(node.Properties);
+                    builder.Middle();                    
+                    if(NodosSession.NodeRegistry.count(node.Name) > 0){
+                        NodosSession.NodeRegistry[node.Name].DrawAndEditProperties(node.Properties);
+                    }else{
+                        im_draw_basic_widgets(node.Properties);
+                    }
                 }
 
                 // output column.
@@ -1549,6 +1553,31 @@ void Application_Frame()
         //drawList->AddCircleFilled(ImGui::GetMousePosOnOpeningCurrentPopup(), 10.0f, 0xFFFF00FF);
 
         Node* node = nullptr;
+
+        // NODOS DEV ====================================================================================
+        // Automatic population from registry
+        for(auto nodos: NodosSession.NodeRegistry){
+            if (ImGui::MenuItem(nodos.first.c_str())){
+                // Standard node spawner behavior, only we construct the objects
+                // using the registry data.
+                // NodeRegistry is a map, so we need the value.
+                nodos::NodeDescription Desc = nodos.second;
+                // Create node object and pass the type name.
+                s_Nodes.emplace_back(GetNextId(), Desc.Type.c_str());
+
+                // Handle creating the pins
+                for(nodos::PinDescription p : Desc.Inputs)
+                    s_Nodes.back().Inputs.emplace_back(GetNextId(), p.Label.c_str(), PinType::Flow);
+                for(nodos::PinDescription p : Desc.Outputs)
+                    s_Nodes.back().Outputs.emplace_back(GetNextId(), p.Label.c_str(), PinType::Flow);
+
+                // Standard scrubber from examples.
+                BuildNode(&s_Nodes.back());
+                // "return" value from example spawner
+                node = &s_Nodes.back();
+            }
+        }
+
         if (ImGui::MenuItem("Input Action"))
             node = SpawnInputActionNode(s_Nodes);
         if (ImGui::MenuItem("Output Action"))
