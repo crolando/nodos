@@ -42,7 +42,7 @@ static std::vector<Node>    s_Nodes;   // Session Nodes - there is an ID that is
 static std::vector<Link>    s_Links;   // Session Links - there is an ID that is important
 
 // Backend populates this with node position data.  save it directly to your "project file"
-// It's sort of private to the backend, so just let it serailze/deserialze and it should work.
+// It's sort of private to the backend, so just let it serailze/deseralize and it should work.
 // The this data hooks up to the s_Nodes and s_Links vectors based on the node.ID and link.ID.
 static std::string          s_BlueprintData;
 
@@ -404,20 +404,55 @@ void Application_Initialize()
     s_RestoreIcon      = Application_LoadTexture("Data/ic_restore_white_24dp.png");
 
 
-
-
-
-
     // Extremely bad deserialization system
-    for (unsigned long long id = 0; id < s_Nodes.size(); id++)
-    {
-        std::ifstream inf(std::to_string(id) + "_node_properties.txt");
-        std::stringstream in;
-        in << inf.rdbuf();
-        std::string serial_properties(in.str());
+    std::string line; // tracks current line in file read loop
+    std::ifstream inf("nodos_project.txt");
+    int id = 0; // actual node id.  Note that the node id and s_Nodes[x] index are NOT THE SAME.
+    int highest_id = 0; // Track highest ID encountered, so we can seed the s_NextId variable which is used a lot in GetNextId()
+    std::string NodeName;  // Actually node type
+    std::stringstream PropBuffer; // Accumulator for properties lines in a loop.
+    std::string Properties; // Whole, intact, Properties table after the loop.
+    int PropertiesCount; // Count of properties lines under a node section.
 
-        s_Nodes[id].Properties.deseralize(serial_properties);
-    }
+    // Processes each node in turn.  Note there are loads
+    // of more getline statements inside this loop, so this outer loop ends up iterating on whole node boundaries.
+    while(std::getline(inf,line))
+    {
+        // Shuttle data into ID, NodeName, and Properties variables.
+        // first line is ID, which links us back to the file that has the node positions and zoom
+        id = std::stol(line);
+
+        // The entire example relies heavily on s_NextId to generate fresh IDs.
+        // After serialization, s_NextId is usually 1, which overlaps our
+        // re-serialized data.
+        highest_id = std::max(highest_id,id);
+
+        // advance to next line
+        std::getline(inf,line);
+        // node type is listed here
+        NodeName = line;
+        // advance to next line
+        std::getline(inf,line);
+        // count of properties lines are here
+        PropertiesCount = std::stol(line);
+        // read in properties line by line
+        for(int i = 0; i < PropertiesCount; i++) {
+            std::getline(inf,line);
+            // note that we have to re-add the endline because getline consumes it.
+            PropBuffer << line <<std::endl;
+        }
+        // now we have all the propreties!
+        Properties = PropBuffer.str();
+
+        // Use data in Nodename and Properties to instantiate nodes.
+        s_Nodes.push_back(Node(id,NodeName.c_str()));
+        s_Nodes.back().Name = NodeName;
+        s_Nodes.back().Properties.deseralize(Properties);
+    } // no more chars
+
+
+    // Seeed the "s_NextId" so it doesn't destroy our stuff
+    SetNextId(highest_id + 1);
 
     //auto& io = ImGui::GetIO();
 }
@@ -437,12 +472,21 @@ void Application_Finalize()
     releaseTexture(s_SaveIcon);
     releaseTexture(s_HeaderBackground);
 
-    // Extremely bad serilzation system
-    //for (auto& node : s_Nodes)
-    for (unsigned long long id = 0; id < s_Nodes.size(); id++)
+    // Extremely bad serilzation system    
+    std::ofstream out("nodos_project.txt");
+    // For every node in s_Nodes...
+    for (unsigned long long i = 0; i < s_Nodes.size(); i++)
     {
-        std::ofstream out(std::to_string(id) + "_node_properties.txt");
-        out << s_Nodes[id].Properties.serialize();
+        // First line is ID
+        out << s_Nodes[i].ID.Get() << std::endl;
+        // Next line is Name (node type)
+        out << s_Nodes[i].Name << std::endl;
+        int count = 0;
+        // The next line is a number describing the count of properties lines
+        std::string props = s_Nodes[i].Properties.serialize(count);
+        out << count << std::endl;
+        // Then the next lines are the actual property lines.
+        out << props;
     }
 
     if (m_Editor)

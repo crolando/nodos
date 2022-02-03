@@ -124,9 +124,10 @@ public:
         return table[Key];
     }
 
-    std::string serialize() {
+    std::string serialize(int& entries) {
         std::string seralization;
         attr_type attribute_type;
+        int count = 0;
         for (const auto& kv : table) {
             seralization.append(kv.first);
             seralization.append("\n");
@@ -143,7 +144,9 @@ public:
                     seralization.append("i\n");
                     break;
             }
+            count +=3;
         }
+        entries = count;
         return seralization;
     }
 

@@ -11,6 +11,11 @@ int GetNextId()
     return s_NextId++;
 }
 
+void SetNextId(int Id)
+{
+    s_NextId = Id;
+}
+
 
 // BuildNode exists because during Spawn**Node(), the Pins are not fully
 // constructed since the information is reflective.

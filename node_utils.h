@@ -4,6 +4,8 @@
 #include <nodos.h>
 
 int GetNextId();
+// Seralization can secretly consume IDs, so we need a way to set it.
+void SetNextId(int);
 void BuildNode(Node* node);
 void BuildNodes();
 
