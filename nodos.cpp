@@ -37,8 +37,8 @@ nodos_session_data NodosSession;
 
 static const int            s_PinIconSize = 24;
 
+std::vector<Node>& s_Nodes = NodosSession.s_Nodes;
 
-static std::vector<Node>    s_Nodes;   // Session Nodes - there is an ID that is important
 static std::vector<Link>    s_Links;   // Session Links - there is an ID that is important
 
 // Backend populates this with node position data.  save it directly to your "project file"
@@ -405,6 +405,7 @@ void Application_Initialize()
 
 
     // Extremely bad deserialization system
+    // PHASE ONE - READ FILE TO MEMORY --------------------------------------------
     std::string line; // tracks current line in file read loop
     std::ifstream inf("nodos_project.txt");
     int id = 0; // actual node id.  Note that the node id and s_Nodes[x] index are NOT THE SAME.
@@ -444,16 +445,39 @@ void Application_Initialize()
         // now we have all the propreties!
         Properties = PropBuffer.str();
 
-        // Use data in Nodename and Properties to instantiate nodes.
-        s_Nodes.push_back(Node(id,NodeName.c_str()));
-        s_Nodes.back().Name = NodeName;
-        s_Nodes.back().Properties.deseralize(Properties);
-    } // no more chars
-
-
-    // Seeed the "s_NextId" so it doesn't destroy our stuff
-    SetNextId(highest_id + 1);
-
+        // PHASE TWO - INSTANTIATE NODES ------------------------------------------
+        // Use data in Nodename and Properties to instantiate nodes from the registry
+        // (new node definition system)
+        if (NodosSession.NodeRegistry.count(NodeName) > 0)
+        {
+            NodosSession.RestoreRegistryNode(NodeName,&Properties,id);
+        } else {
+            // This mess is only here to support the old examples. We can remove this
+            // when the old examples are ported to the new node_defs system.
+            //
+            // Call the appropriate example node spawner.  You must do this
+            // because the spawners have the pin layout information, and pin instantiation
+            // must be done to keep the ID alignment.
+                     if (NodeName == "InputAction Fire") {SpawnInputActionNode(s_Nodes);}
+                else if (NodeName == "Branch")           {SpawnBranchNode(s_Nodes);}
+                else if (NodeName == "Do N")             {SpawnDoNNode(s_Nodes);}
+                else if (NodeName == "OutputAction")     {SpawnOutputActionNode(s_Nodes);}
+                else if (NodeName == "Print String")     {SpawnPrintStringNode(s_Nodes);}
+                else if (NodeName == "")                 {SpawnMessageNode(s_Nodes);}
+                else if (NodeName == "Set Timer")        {SpawnSetTimerNode(s_Nodes);}
+                else if (NodeName == "<")                {SpawnLessNode(s_Nodes);}
+                else if (NodeName == "o.O")              {SpawnWeirdNode(s_Nodes);}
+                else if (NodeName == "Single Line Trace by Channel") {SpawnTraceByChannelNode(s_Nodes);}
+                else if (NodeName == "Sequence")         {SpawnTreeSequenceNode(s_Nodes);}
+                else if (NodeName == "Move To")          {SpawnTreeTaskNode(s_Nodes);}
+                else if (NodeName == "Random Wait")      {SpawnTreeTask2Node(s_Nodes);}
+                else if (NodeName == "Test Comment")     {SpawnComment(s_Nodes);}
+                else if (NodeName == "Transform")        {SpawnHoudiniTransformNode(s_Nodes);}
+                else if (NodeName == "Group")            {SpawnHoudiniGroupNode(s_Nodes);}
+                else {  throw std::invalid_argument("Deserializer encountered a unrecognized legacy node name: " + NodeName);}
+                s_Nodes.back().Properties.deseralize(Properties);
+        } // Done with node instantiation.
+    } // Done with a node processing section.  Loop back if there's another node (more lines in getline)
     //auto& io = ImGui::GetIO();
 }
 
@@ -1599,26 +1623,11 @@ void Application_Frame()
         Node* node = nullptr;
 
         // NODOS DEV ====================================================================================
-        // Automatic population from registry
+        // YOU ARE IN THE RIGHT CLICK MENU HANDLER NOW.
+        // Populate the right click menu with all the nodes in the registry.
         for(auto nodos: NodosSession.NodeRegistry){
             if (ImGui::MenuItem(nodos.first.c_str())){
-                // Standard node spawner behavior, only we construct the objects
-                // using the registry data.
-                // NodeRegistry is a map, so we need the value.
-                nodos::NodeDescription Desc = nodos.second;
-                // Create node object and pass the type name.
-                s_Nodes.emplace_back(GetNextId(), Desc.Type.c_str());
-
-                // Handle creating the pins
-                for(nodos::PinDescription p : Desc.Inputs)
-                    s_Nodes.back().Inputs.emplace_back(GetNextId(), p.Label.c_str(), PinType::Flow);
-                for(nodos::PinDescription p : Desc.Outputs)
-                    s_Nodes.back().Outputs.emplace_back(GetNextId(), p.Label.c_str(), PinType::Flow);
-
-                // Standard scrubber from examples.
-                BuildNode(&s_Nodes.back());
-                // "return" value from example spawner
-                node = &s_Nodes.back();
+                node = NodosSession.NewRegistryNode(nodos.first);
             }
         }
 
