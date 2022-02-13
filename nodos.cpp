@@ -478,6 +478,8 @@ void Application_Initialize()
                 s_Nodes.back().Properties.deseralize(Properties);
         } // Done with node instantiation.
     } // Done with a node processing section.  Loop back if there's another node (more lines in getline)
+    // Make pins and node reference reflective.
+    BuildNodes();
     //auto& io = ImGui::GetIO();
 }
 
