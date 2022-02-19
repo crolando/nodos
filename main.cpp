@@ -1,9 +1,7 @@
-#include <QtImGui.h>
-#include <imgui.h>
-#include <QGuiApplication>
 #include <QTimer>
 #include <QSurfaceFormat>
-#include <NodosWidget.h>
+#include <QWidget>
+#include <QApplication>
 #include <mainwindow.h>
 
 int main(int argc, char *argv[])
@@ -20,7 +18,7 @@ int main(int argc, char *argv[])
     m.show();
 
     // Set up a QT timer to pulse the update() function of the node graph widget.
-    NodosWidget* gw = m.findChild<NodosWidget *>("GraphWidget");
+    auto gw = m.findChild<QWidget *>("GraphWidget");
     QTimer timer;
     QObject::connect(&timer, SIGNAL(timeout()), gw, SLOT(update()));
     timer.start(16);
