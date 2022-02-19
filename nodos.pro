@@ -35,8 +35,8 @@ SOURCES += \
     ../qtimgui/src/ImGuiRenderer.cpp \
     ../qtimgui/src/QtImGui.cpp \
     ../qt-imgui-nodes/NodosWidget.cpp \
-    ../qt-imgui-nodes/main.cpp \
-    ../qt-imgui-nodes/mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
     ../qt-imgui-nodes/texture_manager.cpp
 
 HEADERS += \
@@ -58,7 +58,7 @@ HEADERS += \
     ../qtimgui/src/QtImGui.h \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
-    ../qt-imgui-nodes/mainwindow.h \
+    mainwindow.h \
     attribute.h \
     example_node_spawner.h \
     example_property_im_draw.h \
@@ -69,7 +69,7 @@ HEADERS += \
     imgui_stdlib.h
 
 FORMS += \
-    ../qt-imgui-nodes/mainwindow.ui
+    mainwindow.ui
 
 INCLUDEPATH += \
     ../qt-imgui-nodes \
