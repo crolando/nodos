@@ -42,17 +42,17 @@ SOURCES += \
 HEADERS += \
     ../qt-imgui-nodes/node.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.h \
-    ../imgui-node-editor/examples/blueprints-example/utilities/drawing..h \
+    ../imgui-node-editor/examples/blueprints-example/utilities/drawing.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/widgets.h \
-    ../imgui-node-editor/NodeEditor/Include/imgui_node_editor.h \
-    ../imgui-node-editor/NodeEditor/Source/crude_json.h \
-    ../imgui-node-editor/NodeEditor/Source/imgui_bezier_math.h \
-    ../imgui-node-editor/NodeEditor/Source/imgui_bezier_math.inl \
-    ../imgui-node-editor/NodeEditor/Source/imgui_canvas.h \
-    ../imgui-node-editor/NodeEditor/Source/imgui_extra_math.h \
-    ../imgui-node-editor/NodeEditor/Source/imgui_extra_math.inl \
-    ../imgui-node-editor/NodeEditor/Source/imgui_node_editor_internal.h \
-    ../imgui-node-editor/NodeEditor/Source/imgui_node_editor_internal.inl \
+    ../imgui-node-editor/imgui_node_editor.h \
+    ../imgui-node-editor/crude_json.h \
+    ../imgui-node-editor/imgui_bezier_math.h \
+    ../imgui-node-editor/imgui_bezier_math.inl \
+    ../imgui-node-editor/imgui_canvas.h \
+    ../imgui-node-editor/imgui_extra_math.h \
+    ../imgui-node-editor/imgui_extra_math.inl \
+    ../imgui-node-editor/imgui_node_editor_internal.h \
+    ../imgui-node-editor/imgui_node_editor_internal.inl \
     ../imgui-node-editor/external/imgui/imgui.h \
     ../qtimgui/src/ImGuiRenderer.h \
     ../qtimgui/src/QtImGui.h \
