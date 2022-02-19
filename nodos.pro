@@ -40,7 +40,7 @@ SOURCES += \
     ../qt-imgui-nodes/texture_manager.cpp
 
 HEADERS += \
-    node.h \
+    ../qt-imgui-nodes/node.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing..h \
     ../imgui-node-editor/examples/blueprints-example/utilities/widgets.h \
@@ -59,14 +59,13 @@ HEADERS += \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
     mainwindow.h \
-    attribute.h \
-    example_node_spawner.h \
-    example_property_im_draw.h \
-    node_utils.h \
-    nodos.h \
-    nodos_session_data.h
-
-    imgui_stdlib.h
+    ../qt-imgui-nodes/attribute.h \
+    ../qt-imgui-nodes/example_node_spawner.h \
+    ../qt-imgui-nodes/example_property_im_draw.h \
+    ../qt-imgui-nodes/node_utils.h \
+    ../qt-imgui-nodes/nodos.h \
+    ../qt-imgui-nodes/nodos_session_data.h
+    ../qt-imgui-nodes/imgui_stdlib.h
 
 FORMS += \
     mainwindow.ui
