@@ -16,12 +16,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../imgui-node-editor-turnkey/example_node_spawner.cpp \
+    ../imgui-node-editor-turnkey/imgui_stdlib.cpp \
+    ../imgui-node-editor-turnkey/node_utils.cpp \
+    ../imgui-node-editor-turnkey/registry.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
-    ../qt-imgui-nodes/example_node_spawner.cpp \
+    ../imgui-node-editor-turnkey/example_node_spawner.cpp \
     node_defs/import_animal.h \
-    ../qt-imgui-nodes/node_utils.cpp \
-    ../qt-imgui-nodes/nodos.cpp \
-    ../qt-imgui-nodes/imgui_stdlib.cpp \
+    ../imgui-node-editor-turnkey/node_utils.cpp \
+    ../imgui-node-editor-turnkey/nodos.cpp \
+    ../imgui-node-editor-turnkey/imgui_stdlib.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/widgets.cpp \
@@ -41,12 +45,17 @@ SOURCES += \
     ../qt-imgui-nodes/texture_manager.cpp
 
 HEADERS += \
+    ../imgui-node-editor-turnkey/attribute_serialization.h \
+    ../imgui-node-editor-turnkey/example_node_spawner.h \
+    ../imgui-node-editor-turnkey/example_property_im_draw.h \
+    ../imgui-node-editor-turnkey/imgui_stdlib.h \
+    ../imgui-node-editor-turnkey/node_turnkey_types.h \
+    ../imgui-node-editor-turnkey/node_utils.h \
     ../imgui-node-editor/external/imgui/imconfig.h \
     ../imgui-node-editor/external/imgui/imgui_internal.h \
     ../imgui-node-editor/external/imgui/imstb_rectpack.h \
     ../imgui-node-editor/external/imgui/imstb_textedit.h \
     ../imgui-node-editor/external/imgui/imstb_truetype.h \
-    ../qt-imgui-nodes/node.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.h \
     ../imgui-node-editor/examples/blueprints-example/utilities/widgets.h \
@@ -65,18 +74,13 @@ HEADERS += \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
     mainwindow.h \
-    ../qt-imgui-nodes/attribute.h \
-    ../qt-imgui-nodes/example_node_spawner.h \
-    ../qt-imgui-nodes/example_property_im_draw.h \
-    ../qt-imgui-nodes/node_utils.h \
-    ../qt-imgui-nodes/nodos.h \
-    ../qt-imgui-nodes/nodos_session_data.h
-    ../qt-imgui-nodes/imgui_stdlib.h
+
 
 FORMS += \
     mainwindow.ui
 
 INCLUDEPATH += \
+    ../imgui-node-editor-turnkey \
     ../qt-imgui-nodes \
     ../imgui-node-editor \
     ../imgui-node-editor/external/imgui \

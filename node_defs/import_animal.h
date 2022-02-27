@@ -1,15 +1,15 @@
-#include <node.h>
-#include <imgui_stdlib.h> // For 3-arg text box
-
 #ifndef IMPORT_ANIMIAL_H
 #define IMPORT_ANIMIAL_H
+
+#include <node_turnkey_types.h>
+#include <imgui_stdlib.h> // For 3-arg text box
+
+using namespace turnkey;
 
 namespace node_defs
 {
 namespace import_animal
 {
-using namespace nodos;
-
 void Initialize(attr_table& Properties)
 {
     Properties.set_attr("input","enter text here");
@@ -26,12 +26,9 @@ void DrawAndEdit(attr_table& Properties)
     ImGui::PopItemWidth();
 }
 
-void Execute(attr_table& Properties, const std::vector<Link>& Inputs, const std::vector<Link>& Outputs)
+
+NodeDescription ConstructDefinition(void)
 {
-
-}
-
-NodeDescription ConstructDefinition(){
     NodeDescription node;
     node.Type = "Import Animal";
 
@@ -42,8 +39,6 @@ NodeDescription ConstructDefinition(){
 
     node.InitializeDefaultProperties = Initialize;
     node.DrawAndEditProperties = DrawAndEdit;
-    node.Execute = Execute;
-
     return node;
 }
 
