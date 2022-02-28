@@ -1,10 +1,8 @@
 #ifndef IMPORT_ANIMIAL_H
 #define IMPORT_ANIMIAL_H
 
-#include <node_turnkey_types.h>
+#include <node_turnkey_api.h>
 #include <imgui_stdlib.h> // For 3-arg text box
-
-using namespace turnkey;
 
 namespace node_defs
 {
@@ -17,7 +15,7 @@ void Initialize(attr_table& Properties)
 
 void DrawAndEdit(attr_table& Properties)
 {
-    ed::EnableShortcuts(ImGui::GetIO().WantTextInput);
+    ax::NodeEditor::EnableShortcuts(ImGui::GetIO().WantTextInput);
     auto input = Properties.get_attr("input").get_string();
     // The input widgets require some guidance on their widths, or else they're very large. (note matching pop at the end).
     ImGui::PushItemWidth(200);
@@ -27,12 +25,12 @@ void DrawAndEdit(attr_table& Properties)
 }
 
 
-NodeDescription ConstructDefinition(void)
+turnkey::api::NodeDescription ConstructDefinition(void)
 {
-    NodeDescription node;
+    turnkey::api::NodeDescription node;
     node.Type = "Import Animal";
 
-    PinDescription out1;
+    turnkey::api::PinDescription out1;
     out1.DataType = "Animal_DataType";
     out1.Label = "Animal";
     node.Outputs.push_back(out1);
