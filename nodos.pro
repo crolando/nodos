@@ -17,8 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     ../imgui-node-editor-turnkey/attribute.cpp \
-    ../imgui-node-editor-turnkey/imgui_node_editor_turnkey.cpp \
     ../imgui-node-editor-turnkey/node_registry.cpp \
+    ../imgui-node-editor-turnkey/node_turnkey_api.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
     ../imgui-node-editor-turnkey/example_node_spawner.cpp \
     node_defs/import_animal.h \
