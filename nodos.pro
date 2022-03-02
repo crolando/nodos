@@ -17,8 +17,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     ../imgui-node-editor-turnkey/attribute.cpp \
+    ../imgui-node-editor-turnkey/example_property_im_draw.cpp \
     ../imgui-node-editor-turnkey/node_registry.cpp \
     ../imgui-node-editor-turnkey/node_turnkey_api.cpp \
+    ../imgui-node-editor-turnkey/node_turnkey_draw_nodes.cpp \
+    ../imgui-node-editor-turnkey/node_turnkey_frame.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
     ../imgui-node-editor-turnkey/example_node_spawner.cpp \
     node_defs/import_animal.h \
@@ -43,10 +46,12 @@ SOURCES += \
 
 HEADERS += \
     ../imgui-node-editor-turnkey/attribute.h \
+    ../imgui-node-editor-turnkey/draw_utils.h \
     ../imgui-node-editor-turnkey/example_node_spawner.h \
     ../imgui-node-editor-turnkey/example_property_im_draw.h \
     ../imgui-node-editor-turnkey/imgui_stdlib.h \
     ../imgui-node-editor-turnkey/node_turnkey_api.h \
+    ../imgui-node-editor-turnkey/node_turnkey_draw_nodes.h \
     ../imgui-node-editor-turnkey/node_turnkey_types.h \
     ../imgui-node-editor/external/imgui/imconfig.h \
     ../imgui-node-editor/external/imgui/imgui_internal.h \
