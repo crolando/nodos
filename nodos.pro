@@ -22,6 +22,7 @@ SOURCES += \
     ../imgui-node-editor-turnkey/node_turnkey_api.cpp \
     ../imgui-node-editor-turnkey/node_turnkey_draw_nodes.cpp \
     ../imgui-node-editor-turnkey/node_turnkey_frame.cpp \
+    ../imgui-node-editor-turnkey/node_turnkey_handle_interactions.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
     ../imgui-node-editor-turnkey/example_node_spawner.cpp \
     node_defs/import_animal.h \
@@ -52,6 +53,7 @@ HEADERS += \
     ../imgui-node-editor-turnkey/imgui_stdlib.h \
     ../imgui-node-editor-turnkey/node_turnkey_api.h \
     ../imgui-node-editor-turnkey/node_turnkey_draw_nodes.h \
+    ../imgui-node-editor-turnkey/node_turnkey_handle_interactions.h \
     ../imgui-node-editor-turnkey/node_turnkey_types.h \
     ../imgui-node-editor/external/imgui/imconfig.h \
     ../imgui-node-editor/external/imgui/imgui_internal.h \
