@@ -16,11 +16,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../imgui-node-editor-turnkey/attribute.cpp \
+    ../imgui-node-editor-turnkey/imgui_node_editor_turnkey.cpp \
     ../imgui-node-editor-turnkey/node_registry.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
     ../imgui-node-editor-turnkey/example_node_spawner.cpp \
     node_defs/import_animal.h \
-    ../imgui-node-editor-turnkey/nodos.cpp \
     ../imgui-node-editor-turnkey/imgui_stdlib.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.cpp \
@@ -41,7 +42,7 @@ SOURCES += \
     ../qt-imgui-nodes/texture_manager.cpp
 
 HEADERS += \
-    ../imgui-node-editor-turnkey/attribute_serialization.h \
+    ../imgui-node-editor-turnkey/attribute.h \
     ../imgui-node-editor-turnkey/example_node_spawner.h \
     ../imgui-node-editor-turnkey/example_property_im_draw.h \
     ../imgui-node-editor-turnkey/imgui_stdlib.h \
