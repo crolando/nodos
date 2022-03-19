@@ -8,12 +8,12 @@ namespace node_defs
 {
 namespace import_animal
 {
-void Initialize(attr_table& Properties)
+void Initialize(Properties& Properties)
 {
     Properties.set_attr("input","enter text here");
 }
 
-void DrawAndEdit(attr_table& Properties)
+void DrawAndEdit(Properties& Properties)
 {
     ax::NodeEditor::EnableShortcuts(ImGui::GetIO().WantTextInput);
     auto input = Properties.get_attr("input").get_string();
