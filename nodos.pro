@@ -26,7 +26,6 @@ SOURCES += \
     ../imgui-node-editor-turnkey/node_turnkey_internal.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
     ../imgui-node-editor-turnkey/example_node_spawner.cpp \
-    node_defs/import_animal.h \
     ../imgui-node-editor-turnkey/imgui_stdlib.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.cpp \
@@ -80,6 +79,9 @@ HEADERS += \
     ../qt-imgui-nodes/texture_manager.h \
     ../qt-imgui-nodes/NodosWidget.h \
     mainwindow.h \
+    node_defs/import_animal.h \
+    node_defs/blueprint_demo.h
+
 
 
 FORMS += \
