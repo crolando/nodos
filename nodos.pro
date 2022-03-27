@@ -25,7 +25,6 @@ SOURCES += \
     ../imgui-node-editor-turnkey/node_turnkey_handle_interactions.cpp \
     ../imgui-node-editor-turnkey/node_turnkey_internal.cpp \
     ../imgui-node-editor/external/imgui/imgui_tables.cpp \
-    ../imgui-node-editor-turnkey/example_node_spawner.cpp \
     ../imgui-node-editor-turnkey/imgui_stdlib.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/builders.cpp \
     ../imgui-node-editor/examples/blueprints-example/utilities/drawing.cpp \
@@ -48,7 +47,6 @@ SOURCES += \
 HEADERS += \
     ../imgui-node-editor-turnkey/attribute.h \
     ../imgui-node-editor-turnkey/draw_utils.h \
-    ../imgui-node-editor-turnkey/example_node_spawner.h \
     ../imgui-node-editor-turnkey/example_property_im_draw.h \
     ../imgui-node-editor-turnkey/imgui_stdlib.h \
     ../imgui-node-editor-turnkey/node_turnkey_api.h \
