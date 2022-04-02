@@ -77,7 +77,7 @@ namespace Branch
     {
         auto input = Properties.get_attr("button").get_string();
         ImGui::SmallButton(input.c_str());
-        Properties.set_attr("input",input);
+        Properties.set_attr("button",input);
     }
 
 
