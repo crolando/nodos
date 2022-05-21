@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\SDL2-2.0.22\include;..\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui;$(IncludePath)</IncludePath>
     <LibraryPath>..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\SDL2-2.0.22\include;..\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui;$(IncludePath)</IncludePath>
     <LibraryPath>..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -137,6 +137,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\imgui-node-editor-turnkey\attribute.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\builders.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\drawing.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\example_property_im_draw.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\imgui_stdlib.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_registry.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_api.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_frame.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_internal.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\texture_manager.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\widgets.cpp" />
+    <ClCompile Include="..\imgui-node-editor\crude_json.cpp" />
+    <ClCompile Include="..\imgui-node-editor\imgui_canvas.cpp" />
+    <ClCompile Include="..\imgui-node-editor\imgui_node_editor.cpp" />
+    <ClCompile Include="..\imgui-node-editor\imgui_node_editor_api.cpp" />
     <ClCompile Include="..\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="..\imgui\backends\imgui_impl_sdl.cpp" />
     <ClCompile Include="..\imgui\imgui.cpp" />
@@ -145,6 +162,11 @@
     <ClCompile Include="..\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\imgui-node-editor\imgui_bezier_math.inl" />
+    <None Include="..\imgui-node-editor\imgui_extra_math.inl" />
+    <None Include="..\imgui-node-editor\imgui_node_editor_internal.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

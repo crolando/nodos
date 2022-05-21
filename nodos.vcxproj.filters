@@ -13,31 +13,102 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\dear imgui">
+      <UniqueIdentifier>{09be06bc-6828-4fbd-a3d1-4ef18e4b1886}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imgui-node-editor">
+      <UniqueIdentifier>{a215860e-b0fb-4afb-8adb-46b6e8a7035e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\turnkey">
+      <UniqueIdentifier>{55453df4-6841-40e0-99a4-239d6d37b502}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\imgui\imgui.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\dear imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\imgui\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\dear imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\imgui\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\backends\imgui_impl_sdl.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\dear imgui</Filter>
     </ClCompile>
     <ClCompile Include="..\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\dear imgui</Filter>
     </ClCompile>
+    <ClCompile Include="..\imgui\backends\imgui_impl_sdl.cpp">
+      <Filter>Source Files\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui_tables.cpp">
+      <Filter>Source Files\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor\imgui_canvas.cpp">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor\imgui_node_editor.cpp">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor\imgui_node_editor_api.cpp">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor\crude_json.cpp">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\attribute.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\example_property_im_draw.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\imgui_stdlib.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_registry.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_api.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_frame.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_internal.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\widgets.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\builders.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\drawing.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\texture_manager.cpp">
+      <Filter>Source Files\turnkey</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\imgui-node-editor\imgui_node_editor_internal.inl">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </None>
+    <None Include="..\imgui-node-editor\imgui_bezier_math.inl">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </None>
+    <None Include="..\imgui-node-editor\imgui_extra_math.inl">
+      <Filter>Source Files\imgui-node-editor</Filter>
+    </None>
   </ItemGroup>
 </Project>
