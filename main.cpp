@@ -1,3 +1,6 @@
+// NODOS
+// SDL2-implementation-specific main loop
+// Mostly code copied from:
 // Dear ImGui: standalone example application for SDL2 + OpenGL
 // (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
@@ -8,96 +11,82 @@
 #include "imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <SDL.h>
-#include <texture_manager.h>
+#include <SDL_opengl.h>
+#include <node_turnkey_api.h>
 
-// Texture Class *****************************************************************************************************
+
+// Texture Handling Stuff *****************************************************************************************************
 #include <unordered_map>
+#include <nodos_texture.h>
 
-// implement members
-std::unordered_map<GLuint, > texture_owner;
+// array mapping a GLtexture ID to data
+std::unordered_map<GLuint, nodos_texture> texture_owner;
+// ****************************************************************************************************************************
 
-// imgui-node-editor needs us to implement non-member Application_*Texture*() functions,
-// and since we're in QT, we will use a subclass of QT's QOpenGLExtraFunctions class.
-// So, we need these call-forwarder functions
-void* Application_LoadTexture(char const* path)
+
+// LoadTexture actually uploads the texture to the GPU
+ImTextureID turnkey::api::Application_LoadTexture(const char* path)
 {
-    return texture_manager::LoadTexture(path);
-}
-
-void Application_DestroyTexture(ImTextureID texture)
-{
-    return texture_manager::DestroyTexture(texture);
-}
-
-int Application_GetTextureWidth(void* id)
-{
-    return texture_manager::GetTextureWidth(id);
-}
-
-int Application_GetTextureHeight(void* id)
-{
-    return texture_manager::GetTextureHeight(id);
-}
-
-void* texture_manager::LoadTexture(const char* path)
-{
-    // The Application_Loadtexture call should be prepended to adjust for this project's directory layout.
-    const QString data_prefix("../imgui-node-editor/examples/blueprints-example/");
-    const QString build_path = QString(path).prepend(data_prefix);
-
-    QImage qtex(build_path);
-    if (qtex.isNull()) {
+    // Load texture file into ram
+    nodos_texture pixels(path);
+    if (pixels.data == nullptr) {
         exit(-1);
     }
 
-    // Create a raw pointer so we construct the thing
-    // which creates a OpenGL ID and uploads it to the graphics card.
-    QOpenGLTexture* t_ptr = new QOpenGLTexture(QImage(qtex).mirrored());
-    t_ptr->setMinificationFilter(QOpenGLTexture::LinearMipMapLinear);
-    t_ptr->setMagnificationFilter(QOpenGLTexture::Linear);
+    
+    GLuint GlTextureId;
+    // Ask OpenGl to reserve a space in vram for a "texture object", and store that object's Id number into the 2nd argument.
+    glGenTextures(1, &GlTextureId);
 
-    // now that we have an ID, we can put the pointer into a unique_ptr which
-    // can safely carry it to the destruction function DestroyTexture
-    GLuint gid = t_ptr->textureId();
+    // tell opengl to "plug in" the "texture object ID" into "the GL_TEXTURE_2D Slot of the state machine".
+    glBindTexture(GL_TEXTURE_2D, GlTextureId);
+    
+    // Upload pixels to GPU, construct texture object, store result in "whatever ID is plugged into the 
+    // GL_TEXTURE_2D slot".  
+    int mip_map_level = 0;
+    auto channel_arrangement = GL_RGBA;
+    glTexImage2D(GL_TEXTURE_2D, 0, channel_arrangement, pixels.dim_x, pixels.dim_y, 0, channel_arrangement, GL_UNSIGNED_BYTE, pixels.data);
 
-    // Some book-keeping to maintain clear ownership and link between ID and pix data
-    // std::unordered_map<GLuint, std::unique_ptr<QOpenGLTexture>> texture_owner;
-    texture_owner[gid] = std::unique_ptr<QOpenGLTexture>(t_ptr);
+    // set min filter to linearmipmaplinar
+    // set max filter to linear
+    
+    // store the texture 
+    // TODO: use move constructor
+    //texture_owner[GlTextureId] = pixels;
 
-    return (ImTextureID)gid;
+    return (ImTextureID)GlTextureId;
 }
 
-void texture_manager::DestroyTexture(ImTextureID texture)
+void turnkey::api::Application_DestroyTexture(ImTextureID texture)
 {
-    //resture our GLuint from our void*
+    //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
 
     //delete the texture on the graphics card side.
-    texture_owner[gid]->destroy();
+    glDeleteTextures(0, &gid);
 
-    // destroy the QOpenGLTexture
+    // destroy the nodos_texture and key-value-pair in the map
     texture_owner.erase(gid);
 }
 
-int texture_manager::GetTextureWidth(ImTextureID texture)
+unsigned int turnkey::api::Application_GetTextureWidth(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
 
     // use hash table to lookup QOpenGLTexture unique pointer
-    return texture_owner[gid]->width();
+    return texture_owner[gid].dim_x;
 
 }
 
-int texture_manager::GetTextureHeight(ImTextureID texture)
+unsigned int turnkey::api::Application_GetTextureHeight(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
 
     // use hash table to lookup QOpenGLTexture unique pointer
-    return texture_owner[gid]->height();
+    return texture_owner[gid].dim_y;
 }
-
 
 
 

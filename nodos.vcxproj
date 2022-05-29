@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
-    <LibraryPath>..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
+    <LibraryPath>..\glew-2.1.0\lib\Release\x64;..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
-    <LibraryPath>..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
+    <LibraryPath>..\glew-2.1.0\lib\Release\x64;..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,7 +116,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;SDL2main.lib;SDL2.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,7 +133,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32s.lib;SDL2main.lib;SDL2.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -148,7 +148,6 @@
     <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_frame.cpp" />
     <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.cpp" />
     <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_internal.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\texture_manager.cpp" />
     <ClCompile Include="..\imgui-node-editor-turnkey\widgets.cpp" />
     <ClCompile Include="..\imgui-node-editor\crude_json.cpp" />
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui.cpp" />
@@ -159,12 +158,34 @@
     <ClCompile Include="..\imgui-node-editor\imgui_canvas.cpp" />
     <ClCompile Include="..\imgui-node-editor\imgui_node_editor.cpp" />
     <ClCompile Include="..\imgui-node-editor\imgui_node_editor_api.cpp" />
+    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="imgui_impl_sdl.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="nodos_texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\imgui-node-editor\imgui_bezier_math.inl" />
     <None Include="..\imgui-node-editor\imgui_extra_math.inl" />
     <None Include="..\imgui-node-editor\imgui_node_editor_internal.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\glew-2.1.0\include\GL\eglew.h" />
+    <ClInclude Include="..\glew-2.1.0\include\GL\glew.h" />
+    <ClInclude Include="..\glew-2.1.0\include\GL\glxew.h" />
+    <ClInclude Include="..\glew-2.1.0\include\GL\wglew.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\attribute.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\builders.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\drawing.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\draw_utils.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\example_property_im_draw.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\imgui_stdlib.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_api.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_internal.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_types.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\stb_image.h" />
+    <ClInclude Include="..\imgui-node-editor-turnkey\widgets.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

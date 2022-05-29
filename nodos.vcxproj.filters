@@ -22,6 +22,15 @@
     <Filter Include="Source Files\dear imgui INE version">
       <UniqueIdentifier>{09be06bc-6828-4fbd-a3d1-4ef18e4b1886}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\turnkey">
+      <UniqueIdentifier>{7733e28b-398e-4a98-8c4d-f4c0d98e2f6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dear imgui INE version">
+      <UniqueIdentifier>{afca5a61-9313-40ea-8fdf-582f6abaeaae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\glew">
+      <UniqueIdentifier>{e516f4b6-9533-4a87-9901-b262890baa44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,9 +84,6 @@
     <ClCompile Include="..\imgui-node-editor-turnkey\drawing.cpp">
       <Filter>Source Files\turnkey</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\texture_manager.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui_widgets.cpp">
       <Filter>Source Files\dear imgui INE version</Filter>
     </ClCompile>
@@ -93,6 +99,15 @@
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui_tables.cpp">
       <Filter>Source Files\dear imgui INE version</Filter>
     </ClCompile>
+    <ClCompile Include="nodos_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_sdl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\imgui-node-editor\imgui_node_editor_internal.inl">
@@ -104,5 +119,58 @@
     <None Include="..\imgui-node-editor\imgui_extra_math.inl">
       <Filter>Source Files\imgui-node-editor</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\imgui-node-editor-turnkey\widgets.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\stb_image.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_types.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_internal.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\imgui_stdlib.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\example_property_im_draw.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\drawing.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\draw_utils.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\builders.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\attribute.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_api.h">
+      <Filter>Header Files\turnkey</Filter>
+    </ClInclude>
+    <ClInclude Include="..\glew-2.1.0\include\GL\eglew.h">
+      <Filter>Header Files\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\glew-2.1.0\include\GL\glew.h">
+      <Filter>Header Files\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\glew-2.1.0\include\GL\glxew.h">
+      <Filter>Header Files\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="..\glew-2.1.0\include\GL\wglew.h">
+      <Filter>Header Files\glew</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
