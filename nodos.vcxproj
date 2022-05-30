@@ -161,7 +161,6 @@
     <ClCompile Include="imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui_impl_sdl.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="nodos_texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\imgui-node-editor\imgui_bezier_math.inl" />

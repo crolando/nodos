@@ -15,6 +15,8 @@
 #include <SDL_opengl.h>
 #include <node_turnkey_api.h>
 #include <fstream>
+#define STB_IMAGE_IMPLEMENTATION // image loader needs this...
+#include "stb_image.h"
 
 
 
@@ -51,9 +53,13 @@ MessageCallback(GLenum source,
 // LoadTexture actually uploads the texture to the GPU
 ImTextureID turnkey::api::Application_LoadTexture(const char* path)
 {
-    // Load texture file into ram
-    nodos_texture pixels(path);
-    if (pixels.data == nullptr) {
+    // This is an abstract container that holds the cpu-program-relevent texture data
+    nodos_texture meta_tex;
+
+    // Load gpu-only pixel data into ram
+    unsigned char* pixels = stbi_load(path, &meta_tex.dim_x, &meta_tex.dim_y, &meta_tex.channel_count, 0);
+
+    if (pixels == nullptr) {
         exit(-1);
     }
 
@@ -69,15 +75,19 @@ ImTextureID turnkey::api::Application_LoadTexture(const char* path)
     // GL_TEXTURE_2D slot".  
     int mip_map_level = 0;
     auto channel_arrangement = GL_RGBA;
-    glTexImage2D(GL_TEXTURE_2D, 0, channel_arrangement, pixels.dim_x, pixels.dim_y, 0, channel_arrangement, GL_UNSIGNED_BYTE, pixels.data);
+    glTexImage2D(GL_TEXTURE_2D, 0, channel_arrangement, meta_tex.dim_x, meta_tex.dim_y, 0, channel_arrangement, GL_UNSIGNED_BYTE, pixels);
+
+    // destroy the ram copy of pixel data, now that it is in vram.
+    stbi_image_free(pixels);
+
+    // configure the texture properties
     glGenerateMipmap(GL_TEXTURE_2D);
 
     // set min filter to linearmipmaplinar
     // set max filter to linear
     
     // store the texture 
-    // TODO: use move constructor
-    texture_owner[GlTextureId] = pixels;
+    texture_owner[GlTextureId] = meta_tex;
 
     return (ImTextureID)GlTextureId;
 }

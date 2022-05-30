@@ -102,9 +102,6 @@
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui_tables.cpp">
       <Filter>Source Files\dear imgui INE version</Filter>
     </ClCompile>
-    <ClCompile Include="nodos_texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
