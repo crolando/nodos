@@ -6,6 +6,8 @@ public:
     nodos_texture();
     nodos_texture(const char* filename);
     ~nodos_texture();
+    nodos_texture(nodos_texture&& donor);
+    nodos_texture& operator=(const nodos_texture&);
     int dim_x, dim_y, channel_count;
     unsigned char* data;
 };

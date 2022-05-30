@@ -31,6 +31,9 @@
     <Filter Include="Header Files\glew">
       <UniqueIdentifier>{e516f4b6-9533-4a87-9901-b262890baa44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\node_defs">
+      <UniqueIdentifier>{6106ca94-1d65-423e-9ee1-905e327c0d1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,6 +174,12 @@
     </ClInclude>
     <ClInclude Include="..\glew-2.1.0\include\GL\wglew.h">
       <Filter>Header Files\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="node_defs\blueprint_demo.h">
+      <Filter>Header Files\node_defs</Filter>
+    </ClInclude>
+    <ClInclude Include="node_defs\import_animal.h">
+      <Filter>Header Files\node_defs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <node_turnkey_api.h>
+#include <fstream>
 
 
 
@@ -24,6 +25,27 @@
 // array mapping a GLtexture ID to data
 std::unordered_map<GLuint, nodos_texture> texture_owner;
 // ****************************************************************************************************************************
+
+// Node definitions ******************
+#include "node_defs/import_animal.h"
+#include "node_defs/blueprint_demo.h"
+// **************************************
+
+
+// opengl error callback because I don't know what I"m doing
+void GLAPIENTRY
+MessageCallback(GLenum source,
+    GLenum type,
+    GLuint id,
+    GLenum severity,
+    GLsizei length,
+    const GLchar* message,
+    const void* userParam)
+{
+    fprintf(stdout, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
+        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
+        type, severity, message);
+}
 
 
 // LoadTexture actually uploads the texture to the GPU
@@ -48,6 +70,7 @@ ImTextureID turnkey::api::Application_LoadTexture(const char* path)
     int mip_map_level = 0;
     auto channel_arrangement = GL_RGBA;
     glTexImage2D(GL_TEXTURE_2D, 0, channel_arrangement, pixels.dim_x, pixels.dim_y, 0, channel_arrangement, GL_UNSIGNED_BYTE, pixels.data);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     // set min filter to linearmipmaplinar
     // set max filter to linear
@@ -90,6 +113,50 @@ unsigned int turnkey::api::Application_GetTextureHeight(ImTextureID texture)
     return texture_owner[gid].dim_y;
 }
 
+void Init(void)
+{
+
+    // There is a ImGui context with the default font.
+    // Build a custom font atlas and replace the default one.
+    const ImWchar ranges[] =
+    {
+        0x0020, 0x00FF, // Basic Latin + Latin Supplement
+        0x0104, 0x017C, // Polish characters and more
+        0,
+    };
+
+    ImFontConfig config;
+    config.OversampleH = 4;
+    config.OversampleV = 4;
+    config.PixelSnapH = false;
+
+    //ImFontAtlas* fa = ImGui::GetIO().Fonts;
+    //fa->AddFontFromFileTTF("..\\qt-imgui-nodes\\Data\\selawk.ttf", 22.0f, &config, ranges);
+    //fa->Build();
+
+    // Now that there's an opengl context, we can init the node editor
+    turnkey::api::SetContext(turnkey::api::CreateContext());
+    turnkey::api::Initialize();
+    turnkey::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::DoN::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
+
+    // Pattern for restoring our project files
+    
+    std::ifstream inf("nodos_project.txt");
+    std::stringstream ssbuf;
+    ssbuf << inf.rdbuf();
+    std::string sbuf = ssbuf.str();
+    size_t size = sbuf.size();
+    turnkey::api::LoadNodesAndLinksFromBuffer(size, sbuf.c_str());
+}
+
+
 
 
 // *******************************************************************************************************************
@@ -97,6 +164,7 @@ unsigned int turnkey::api::Application_GetTextureHeight(ImTextureID texture)
 // Main code
 int main(int, char**)
 {
+    fprintf(stderr,"hello world - error channel\n");
     // Setup SDL
     // (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
     // depending on whether SDL_INIT_GAMECONTROLLER is enabled or disabled.. updating to latest version of SDL is recommended!)
@@ -164,6 +232,11 @@ int main(int, char**)
         return 1;
     }
 
+    // register opengl error handler callback:
+
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(MessageCallback, 0);
+
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -199,6 +272,12 @@ int main(int, char**)
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+
+    // node startup
+    Init();
+
+
+
     // Main loop
     bool done = false;
     while (!done)
@@ -222,6 +301,8 @@ int main(int, char**)
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplSDL2_NewFrame(window);
         ImGui::NewFrame();
+
+        turnkey::api::Frame();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)

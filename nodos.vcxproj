@@ -186,6 +186,8 @@
     <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_types.h" />
     <ClInclude Include="..\imgui-node-editor-turnkey\stb_image.h" />
     <ClInclude Include="..\imgui-node-editor-turnkey\widgets.h" />
+    <ClInclude Include="node_defs\blueprint_demo.h" />
+    <ClInclude Include="node_defs\import_animal.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
