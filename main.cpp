@@ -54,7 +54,7 @@ ImTextureID turnkey::api::Application_LoadTexture(const char* path)
     
     // store the texture 
     // TODO: use move constructor
-    //texture_owner[GlTextureId] = pixels;
+    texture_owner[GlTextureId] = pixels;
 
     return (ImTextureID)GlTextureId;
 }
