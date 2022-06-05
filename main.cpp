@@ -5,14 +5,19 @@
 // (SDL is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
-#include "GL/glew.h" // must be included before opengl
 
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <SDL.h>
-#include <SDL_opengl.h>
+// Glew is not used during ES use
+#ifdef IMGUI_IMPL_OPENGL_ES2
+    #include <SDL_opengles2.h>
+#else
+    #include "GL/glew.h" // must be included before opengl
+    #include <SDL_opengl.h>
+#endif
 #include <node_turnkey_api.h>
 #include <fstream>
 #define STB_IMAGE_IMPLEMENTATION // image loader needs this...
@@ -39,6 +44,7 @@ std::unordered_map<GLuint, nodos_texture> texture_owner;
 
 
 // opengl error callback because I don't know what I"m doing
+#ifndef IMGUI_IMPL_OPENGL_ES2
 void GLAPIENTRY
 MessageCallback(GLenum source,
     GLenum type,
@@ -52,7 +58,7 @@ MessageCallback(GLenum source,
         (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
         type, severity, message);
 }
-
+#endif
 
 // LoadTexture actually uploads the texture to the GPU
 ImTextureID turnkey::api::Application_LoadTexture(const char* path)
@@ -247,10 +253,10 @@ int main(int, char**)
     }
 
     // register opengl error handler callback:
-
+#ifndef IMGUI_IMPL_OPENGL_ES2
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
-
+#endif
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -369,6 +375,7 @@ int main(int, char**)
     char* cbuffer  = turnkey::api::SaveNodesAndLinksToBuffer(&size);
     // Save "size" count characters from "cbuffer" to a file.
     FILE* bl;
+    bl = fopen("nodos_project.txt","w");
     if (!bl)
     {
         printf("failed to open save-file to save project.\n");
