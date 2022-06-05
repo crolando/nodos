@@ -360,6 +360,20 @@ int main(int, char**)
         SDL_GL_SwapWindow(window);
     }
 
+    // write save file
+    size_t size;
+    char* cbuffer  = turnkey::api::SaveNodesAndLinksToBuffer(&size);
+    // Save "size" count characters from "cbuffer" to a file.
+    FILE* bl;
+    auto er = fopen_s(&bl,"nodos_project.txt","w");
+    if (!bl)
+    {
+        printf("failed to open save-file to save project.\n");
+        return -1;
+    }
+    fwrite(cbuffer, sizeof(char), size, bl);
+    delete cbuffer;
+
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
