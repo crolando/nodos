@@ -18,6 +18,10 @@
 #define STB_IMAGE_IMPLEMENTATION // image loader needs this...
 #include "stb_image.h"
 
+// we use fopen and Visual Studio doesn't like that.
+// so we tell VS to relax
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning(disable:4996)
 
 
 // Texture Handling Stuff *****************************************************************************************************
@@ -365,7 +369,6 @@ int main(int, char**)
     char* cbuffer  = turnkey::api::SaveNodesAndLinksToBuffer(&size);
     // Save "size" count characters from "cbuffer" to a file.
     FILE* bl;
-    auto er = fopen_s(&bl,"nodos_project.txt","w");
     if (!bl)
     {
         printf("failed to open save-file to save project.\n");
