@@ -388,6 +388,9 @@ int main(int, char**)
     fwrite(cbuffer, sizeof(char), size, bl);
     delete cbuffer;
 
+    // Zep CLeanup
+    zep_destroy();
+
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
