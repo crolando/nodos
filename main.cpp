@@ -282,7 +282,7 @@ int main(int, char**)
     // - The fonts will be rasterized at a given size (w/ oversampling) and stored into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame below will call.
     // - Read 'docs/FONTS.md' for more instructions and details.
     // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
-    io.Fonts->AddFontDefault();
+    //io.Fonts->AddFontDefault();
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
@@ -300,7 +300,13 @@ int main(int, char**)
     Init();
 
     // zep startup
-    zep_init(Zep::NVec2f(1.0f, 1.0f));
+    // you must load some font, or else there will be a crash related to a zero-element font array
+    // access attempt.  
+    //std::string fontPath = "C:/code/zep-master/demos/demo_imgui/res/Cousine-Regular.ttf";
+    //io.Fonts->AddFontFromFileTTF(fontPath.c_str(), 26);
+    io.Fonts->AddFontDefault();
+    static bool zep_started = false; // zep_init cannot be called before the first frame.
+    static Zep::NVec2i zep_size = Zep::NVec2i(640, 480);
 
     // Main loop
     bool done = false;
@@ -364,6 +370,17 @@ int main(int, char**)
                 show_another_window = false;
             ImGui::End();
         }
+
+        // 4. Zep window.
+        // zep_init cannot be called before the first frame.
+        if (!zep_started) {
+            zep_init(Zep::NVec2f(1.0f, 1.0f));
+            zep_load(Zep::ZepPath(APP_ROOT) / "main.cpp");
+            zep_started = true;
+        }
+        // Required for CTRL+P and flashing cursor.
+        zep_update();
+        zep_show(zep_size);
 
         // Rendering
         ImGui::Render();
