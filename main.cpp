@@ -376,6 +376,8 @@ int main(int, char**)
         if (!zep_started) {
             zep_init(Zep::NVec2f(1.0f, 1.0f));
             zep_load(Zep::ZepPath(APP_ROOT) / "main.cpp");
+            // Set editing mode to "Not VIM"
+            zep_get_editor().SetGlobalMode(Zep::ZepMode_Standard::StaticName());
             zep_started = true;
         }
         // Required for CTRL+P and flashing cursor.
