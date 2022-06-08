@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\code\zep-master\include;..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>..\zep-master\build;..\zep_imgui\demo\include;..\zep-master\include;..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
     <LibraryPath>C:\code\zep-master\build\lib\Debug;..\glew-2.1.0\lib\Release\x64;..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\code\zep-master\include;..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>..\zep-master\build;..\zep_imgui\demo\include;..\zep-master\include;..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
     <LibraryPath>C:\code\zep-master\build\lib\Release;..\glew-2.1.0\lib\Release\x64;..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -110,7 +110,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);APP_ROOT="C:\code\nodos"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -126,7 +126,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);APP_ROOT="C:\code\nodos"</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -160,6 +160,11 @@
     <ClCompile Include="..\imgui-node-editor\imgui_canvas.cpp" />
     <ClCompile Include="..\imgui-node-editor\imgui_node_editor.cpp" />
     <ClCompile Include="..\imgui-node-editor\imgui_node_editor_api.cpp" />
+    <ClCompile Include="..\zep_imgui\demo\src\editor.cpp" />
+    <ClCompile Include="..\zep_imgui\demo\src\main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui_impl_sdl.cpp" />
     <ClCompile Include="main.cpp" />
@@ -187,6 +192,7 @@
     <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_types.h" />
     <ClInclude Include="..\imgui-node-editor-turnkey\stb_image.h" />
     <ClInclude Include="..\imgui-node-editor-turnkey\widgets.h" />
+    <ClInclude Include="..\zep_imgui\demo\include\editor.h" />
     <ClInclude Include="node_defs\blueprint_demo.h" />
     <ClInclude Include="node_defs\import_animal.h" />
   </ItemGroup>

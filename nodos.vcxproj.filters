@@ -34,6 +34,12 @@
     <Filter Include="Header Files\node_defs">
       <UniqueIdentifier>{6106ca94-1d65-423e-9ee1-905e327c0d1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\zep_imgui">
+      <UniqueIdentifier>{4ef3b565-d65a-42c8-bb47-e741903d1069}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\zep_imgui">
+      <UniqueIdentifier>{32a609e0-9707-4a28-8c7e-0deaef53fab5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -108,6 +114,12 @@
     <ClCompile Include="imgui_impl_sdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\zep_imgui\demo\src\editor.cpp">
+      <Filter>Source Files\zep_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\zep_imgui\demo\src\main.cpp">
+      <Filter>Source Files\zep_imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\imgui-node-editor\imgui_node_editor_internal.inl">
@@ -177,6 +189,9 @@
     </ClInclude>
     <ClInclude Include="node_defs\import_animal.h">
       <Filter>Header Files\node_defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\zep_imgui\demo\include\editor.h">
+      <Filter>Header Files\zep_imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
