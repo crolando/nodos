@@ -43,6 +43,7 @@ std::unordered_map<GLuint, nodos_texture> texture_owner;
 // Node definitions ******************
 #include "node_defs/import_animal.h"
 #include "node_defs/blueprint_demo.h"
+#include "node_defs/zep_in_node.h"
 // **************************************
 
 
@@ -168,6 +169,7 @@ void Init(void)
     turnkey::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
     turnkey::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     turnkey::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
+    turnkey::api::RegisterNewNode(node_defs::zep_in_node::ConstructDefinition());
 
     // Pattern for restoring our project files
     
@@ -371,18 +373,18 @@ int main(int, char**)
             ImGui::End();
         }
 
-        // 4. Zep window.
-        // zep_init cannot be called before the first frame.
-        if (!zep_started) {
-            zep_init(Zep::NVec2f(1.0f, 1.0f));
-            zep_load(Zep::ZepPath(APP_ROOT) / "main.cpp");
-            // Set editing mode to "Not VIM"
-            zep_get_editor().SetGlobalMode(Zep::ZepMode_Standard::StaticName());
-            zep_started = true;
-        }
-        // Required for CTRL+P and flashing cursor.
-        zep_update();
-        zep_show(zep_size);
+        //// 4. Zep window.
+        //// zep_init cannot be called before the first frame.
+        //if (!zep_started) {
+        //    zep_init(Zep::NVec2f(1.0f, 1.0f));
+        //    zep_load(Zep::ZepPath(APP_ROOT) / "main.cpp");
+        //    // Set editing mode to "Not VIM"
+        //    zep_get_editor().SetGlobalMode(Zep::ZepMode_Standard::StaticName());
+        //    zep_started = true;
+        //}
+        //// Required for CTRL+P and flashing cursor.
+        //zep_update();
+        //zep_show(zep_size);
 
         // Rendering
         ImGui::Render();

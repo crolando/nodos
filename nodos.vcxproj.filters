@@ -193,5 +193,8 @@
     <ClInclude Include="..\zep_imgui\demo\include\editor.h">
       <Filter>Header Files\zep_imgui</Filter>
     </ClInclude>
+    <ClInclude Include="node_defs\zep_in_node.h">
+      <Filter>Header Files\node_defs</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -195,6 +195,7 @@
     <ClInclude Include="..\zep_imgui\demo\include\editor.h" />
     <ClInclude Include="node_defs\blueprint_demo.h" />
     <ClInclude Include="node_defs\import_animal.h" />
+    <ClInclude Include="node_defs\zep_in_node.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
