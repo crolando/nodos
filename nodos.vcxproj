@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -71,11 +71,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey\include;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
     <LibraryPath>..\glew-2.1.0\lib\Release\x64;..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
+    <IncludePath>..\glew-2.1.0\include;..\nodos;..\imgui-node-editor-turnkey\include;..\imgui-node-editor;..\SDL2-2.0.22\include;..\imgui-node-editor\external\imgui;$(IncludePath)</IncludePath>
     <LibraryPath>..\glew-2.1.0\lib\Release\x64;..\SDL2-2.0.22\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -137,18 +137,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\imgui-node-editor-turnkey\attribute.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\builders.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\drawing.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\example_property_im_draw.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\imgui_stdlib.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_registry.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_api.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_frame.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_internal.cpp" />
-    <ClCompile Include="..\imgui-node-editor-turnkey\widgets.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\attribute.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\backend_io.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\builders.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\drawing.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\draw_nodes.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\example_property_im_draw.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\frame.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\handle_interactions.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\imgui_stdlib.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\internal.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\node_registry.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\plano_api.cpp" />
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\widgets.cpp" />
     <ClCompile Include="..\imgui-node-editor\crude_json.cpp" />
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui.cpp" />
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui_demo.cpp" />

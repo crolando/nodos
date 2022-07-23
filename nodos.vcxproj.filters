@@ -16,9 +16,6 @@
     <Filter Include="Source Files\imgui-node-editor">
       <UniqueIdentifier>{a215860e-b0fb-4afb-8adb-46b6e8a7035e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\turnkey">
-      <UniqueIdentifier>{55453df4-6841-40e0-99a4-239d6d37b502}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\dear imgui INE version">
       <UniqueIdentifier>{09be06bc-6828-4fbd-a3d1-4ef18e4b1886}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
     </Filter>
     <Filter Include="Header Files\node_defs">
       <UniqueIdentifier>{6106ca94-1d65-423e-9ee1-905e327c0d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\plano">
+      <UniqueIdentifier>{55453df4-6841-40e0-99a4-239d6d37b502}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,42 +50,6 @@
     </ClCompile>
     <ClCompile Include="..\imgui-node-editor\crude_json.cpp">
       <Filter>Source Files\imgui-node-editor</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\attribute.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\example_property_im_draw.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\imgui_stdlib.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_registry.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_api.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_frame.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\node_turnkey_internal.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\widgets.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\builders.cpp">
-      <Filter>Source Files\turnkey</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\drawing.cpp">
-      <Filter>Source Files\turnkey</Filter>
     </ClCompile>
     <ClCompile Include="..\imgui-node-editor\external\imgui\imgui_widgets.cpp">
       <Filter>Source Files\dear imgui INE version</Filter>
@@ -107,6 +71,45 @@
     </ClCompile>
     <ClCompile Include="imgui_impl_sdl.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\attribute.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\backend_io.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\builders.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\draw_nodes.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\drawing.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\example_property_im_draw.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\frame.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\handle_interactions.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\imgui_stdlib.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\internal.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\node_registry.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\plano_api.cpp">
+      <Filter>Source Files\plano</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui-node-editor-turnkey\src\widgets.cpp">
+      <Filter>Source Files\plano</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

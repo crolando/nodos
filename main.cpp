@@ -18,10 +18,10 @@
     #include "GL/glew.h" // must be included before opengl
     #include <SDL_opengl.h>
 #endif
-#include <node_turnkey_api.h>
+#include <plano_api.h>
 #include <fstream>
 #define STB_IMAGE_IMPLEMENTATION // image loader needs this...
-#include "stb_image.h"
+#include "internal/stb_image.h"
 
 // we use fopen and Visual Studio doesn't like that.
 // so we tell VS to relax

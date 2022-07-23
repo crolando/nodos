@@ -1,8 +1,8 @@
 #ifndef BLUEPRINT_DEMO_H
 #define BLUEPRINT_DEMO_H
 
-#include <node_turnkey_api.h>
-#include <imgui_stdlib.h> // For 3-arg text box
+#include <plano_api.h>
+#include <internal/imgui_stdlib.h> // For 3-arg text box
 
 namespace node_defs
 {
