@@ -61,7 +61,7 @@ MessageCallback(GLenum source,
 #endif
 
 // LoadTexture actually uploads the texture to the GPU
-ImTextureID turnkey::api::Application_LoadTexture(const char* path)
+ImTextureID plano::api::Application_LoadTexture(const char* path)
 {
     // This is an abstract container that holds the cpu-program-relevent texture data
     nodos_texture meta_tex;
@@ -102,7 +102,7 @@ ImTextureID turnkey::api::Application_LoadTexture(const char* path)
     return (ImTextureID)GlTextureId;
 }
 
-void turnkey::api::Application_DestroyTexture(ImTextureID texture)
+void plano::api::Application_DestroyTexture(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
@@ -114,7 +114,7 @@ void turnkey::api::Application_DestroyTexture(ImTextureID texture)
     texture_owner.erase(gid);
 }
 
-unsigned int turnkey::api::Application_GetTextureWidth(ImTextureID texture)
+unsigned int plano::api::Application_GetTextureWidth(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
@@ -124,7 +124,7 @@ unsigned int turnkey::api::Application_GetTextureWidth(ImTextureID texture)
 
 }
 
-unsigned int turnkey::api::Application_GetTextureHeight(ImTextureID texture)
+unsigned int plano::api::Application_GetTextureHeight(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
@@ -155,16 +155,16 @@ void Init(void)
     //fa->Build();
 
     // Now that there's an opengl context, we can init the node editor
-    turnkey::api::SetContext(turnkey::api::CreateContext());
-    turnkey::api::Initialize();
-    turnkey::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::DoN::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
-    turnkey::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
+    plano::api::SetContext(plano::api::CreateContext());
+    plano::api::Initialize();
+    plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::DoN::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
 
     // Pattern for restoring our project files
     
@@ -173,7 +173,7 @@ void Init(void)
     ssbuf << inf.rdbuf();
     std::string sbuf = ssbuf.str();
     size_t size = sbuf.size();
-    turnkey::api::LoadNodesAndLinksFromBuffer(size, sbuf.c_str());
+    plano::api::LoadNodesAndLinksFromBuffer(size, sbuf.c_str());
 }
 
 
@@ -322,7 +322,7 @@ int main(int, char**)
         ImGui_ImplSDL2_NewFrame(window);
         ImGui::NewFrame();
 
-        turnkey::api::Frame();
+        plano::api::Frame();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
@@ -372,7 +372,7 @@ int main(int, char**)
 
     // write save file
     size_t size;
-    char* cbuffer  = turnkey::api::SaveNodesAndLinksToBuffer(&size);
+    char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&size);
     // Save "size" count characters from "cbuffer" to a file.
     FILE* bl;
     bl = fopen("nodos_project.txt","w");

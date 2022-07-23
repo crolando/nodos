@@ -25,12 +25,12 @@ void DrawAndEdit(Properties& Properties)
 }
 
 
-turnkey::api::NodeDescription ConstructDefinition(void)
+plano::api::NodeDescription ConstructDefinition(void)
 {
-    turnkey::api::NodeDescription node;
+    plano::api::NodeDescription node;
     node.Type = "Import Animal";
 
-    turnkey::api::PinDescription out1;
+    plano::api::PinDescription out1;
     out1.DataType = "Animal_DataType";
     out1.Label = "Animal";
     node.Outputs.push_back(out1);

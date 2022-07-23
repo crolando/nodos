@@ -19,9 +19,6 @@
     <Filter Include="Source Files\dear imgui INE version">
       <UniqueIdentifier>{09be06bc-6828-4fbd-a3d1-4ef18e4b1886}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\turnkey">
-      <UniqueIdentifier>{7733e28b-398e-4a98-8c4d-f4c0d98e2f6f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\dear imgui INE version">
       <UniqueIdentifier>{afca5a61-9313-40ea-8fdf-582f6abaeaae}</UniqueIdentifier>
     </Filter>
@@ -124,45 +121,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\imgui-node-editor-turnkey\widgets.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\stb_image.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_types.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_internal.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\imgui_stdlib.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\example_property_im_draw.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\drawing.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\draw_utils.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\builders.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\attribute.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_api.h">
-      <Filter>Header Files\turnkey</Filter>
-    </ClInclude>
     <ClInclude Include="..\glew-2.1.0\include\GL\eglew.h">
       <Filter>Header Files\glew</Filter>
     </ClInclude>

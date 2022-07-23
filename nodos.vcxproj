@@ -173,19 +173,6 @@
     <ClInclude Include="..\glew-2.1.0\include\GL\glew.h" />
     <ClInclude Include="..\glew-2.1.0\include\GL\glxew.h" />
     <ClInclude Include="..\glew-2.1.0\include\GL\wglew.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\attribute.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\builders.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\drawing.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\draw_utils.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\example_property_im_draw.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\imgui_stdlib.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_api.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_draw_nodes.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_handle_interactions.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_internal.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\node_turnkey_types.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\stb_image.h" />
-    <ClInclude Include="..\imgui-node-editor-turnkey\widgets.h" />
     <ClInclude Include="node_defs\blueprint_demo.h" />
     <ClInclude Include="node_defs\import_animal.h" />
   </ItemGroup>
