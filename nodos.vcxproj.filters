@@ -31,6 +31,12 @@
     <Filter Include="Source Files\plano">
       <UniqueIdentifier>{55453df4-6841-40e0-99a4-239d6d37b502}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\plano">
+      <UniqueIdentifier>{5c1320ed-3c17-4bf5-92ae-1f79f3bfb4f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\plano\internal">
+      <UniqueIdentifier>{820ee97d-6ed7-4cc6-914a-4f3956316ef1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,6 +144,45 @@
     </ClInclude>
     <ClInclude Include="node_defs\import_animal.h">
       <Filter>Header Files\node_defs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\plano_api.h">
+      <Filter>Header Files\plano</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\plano_types.h">
+      <Filter>Header Files\plano</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\attribute.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\builders.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\draw_nodes.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\draw_utils.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\drawing.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\example_property_im_draw.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\handle_interactions.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\imgui_stdlib.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\internal.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\stb_image.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\widgets.h">
+      <Filter>Header Files\plano\internal</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
