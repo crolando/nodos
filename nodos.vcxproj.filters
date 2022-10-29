@@ -37,6 +37,9 @@
     <Filter Include="Header Files\plano\internal">
       <UniqueIdentifier>{820ee97d-6ed7-4cc6-914a-4f3956316ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SDL2">
+      <UniqueIdentifier>{56cc4651-ffda-4eb1-9bf9-55036682cbd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,43 +78,43 @@
     <ClCompile Include="imgui_impl_sdl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\attribute.cpp">
+    <ClCompile Include="..\plano\src\attribute.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\backend_io.cpp">
+    <ClCompile Include="..\plano\src\backend_io.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\builders.cpp">
+    <ClCompile Include="..\plano\src\builders.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\draw_nodes.cpp">
+    <ClCompile Include="..\plano\src\draw_nodes.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\drawing.cpp">
+    <ClCompile Include="..\plano\src\drawing.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\example_property_im_draw.cpp">
+    <ClCompile Include="..\plano\src\example_property_im_draw.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\frame.cpp">
+    <ClCompile Include="..\plano\src\frame.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\handle_interactions.cpp">
+    <ClCompile Include="..\plano\src\handle_interactions.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\imgui_stdlib.cpp">
+    <ClCompile Include="..\plano\src\imgui_stdlib.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\internal.cpp">
+    <ClCompile Include="..\plano\src\internal.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\node_registry.cpp">
+    <ClCompile Include="..\plano\src\node_registry.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\plano_api.cpp">
+    <ClCompile Include="..\plano\src\plano_api.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
-    <ClCompile Include="..\imgui-node-editor-turnkey\src\widgets.cpp">
+    <ClCompile Include="..\plano\src\widgets.cpp">
       <Filter>Source Files\plano</Filter>
     </ClCompile>
   </ItemGroup>
@@ -124,6 +127,15 @@
     </None>
     <None Include="..\imgui-node-editor\imgui_extra_math.inl">
       <Filter>Source Files\imgui-node-editor</Filter>
+    </None>
+    <None Include="..\SDL2-2.0.22\include\SDL_config.h.cmake">
+      <Filter>Header Files\SDL2</Filter>
+    </None>
+    <None Include="..\SDL2-2.0.22\include\SDL_config.h.in">
+      <Filter>Header Files\SDL2</Filter>
+    </None>
+    <None Include="..\SDL2-2.0.22\include\SDL_revision.h.cmake">
+      <Filter>Header Files\SDL2</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +195,267 @@
     </ClInclude>
     <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\widgets.h">
       <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\begin_code.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\close_code.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_assert.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_atomic.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_audio.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_bits.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_blendmode.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_clipboard.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_android.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_emscripten.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_iphoneos.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_macosx.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_minimal.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_os2.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_pandora.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_windows.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_config_winrt.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_copying.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_cpuinfo.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_egl.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_endian.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_error.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_events.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_filesystem.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_gamecontroller.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_gesture.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_haptic.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_hidapi.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_hints.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_joystick.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_keyboard.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_keycode.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_loadso.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_locale.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_log.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_main.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_messagebox.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_metal.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_misc.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_mouse.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_mutex.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_name.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengl.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengl_glext.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengles.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengles2.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengles2_gl2.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengles2_gl2ext.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengles2_gl2platform.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_opengles2_khrplatform.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_pixels.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_platform.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_power.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_quit.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_rect.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_render.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_revision.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_rwops.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_scancode.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_sensor.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_shape.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_stdinc.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_surface.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_system.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_syswm.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_assert.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_common.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_compare.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_crc32.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_font.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_fuzzer.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_harness.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_images.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_log.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_md5.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_memory.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_test_random.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_thread.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_timer.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_touch.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_types.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_version.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_video.h">
+      <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDL2-2.0.22\include\SDL_vulkan.h">
+      <Filter>Header Files\SDL2</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
