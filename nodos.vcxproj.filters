@@ -34,11 +34,14 @@
     <Filter Include="Header Files\plano">
       <UniqueIdentifier>{5c1320ed-3c17-4bf5-92ae-1f79f3bfb4f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\plano\internal">
-      <UniqueIdentifier>{820ee97d-6ed7-4cc6-914a-4f3956316ef1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\SDL2">
       <UniqueIdentifier>{56cc4651-ffda-4eb1-9bf9-55036682cbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\plano\internal">
+      <UniqueIdentifier>{c21d1c01-7e72-45e1-8538-de3ac458e06a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imgui-node-editor">
+      <UniqueIdentifier>{9d9bf6ea-7b76-4c84-9419-efc4311f0bdb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,45 +159,6 @@
     </ClInclude>
     <ClInclude Include="node_defs\import_animal.h">
       <Filter>Header Files\node_defs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\plano_api.h">
-      <Filter>Header Files\plano</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\plano_types.h">
-      <Filter>Header Files\plano</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\attribute.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\builders.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\draw_nodes.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\draw_utils.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\drawing.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\example_property_im_draw.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\handle_interactions.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\imgui_stdlib.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\internal.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\stb_image.h">
-      <Filter>Header Files\plano\internal</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui-node-editor-turnkey\include\internal\widgets.h">
-      <Filter>Header Files\plano\internal</Filter>
     </ClInclude>
     <ClInclude Include="..\SDL2-2.0.22\include\begin_code.h">
       <Filter>Header Files\SDL2</Filter>
@@ -456,6 +420,66 @@
     </ClInclude>
     <ClInclude Include="..\SDL2-2.0.22\include\SDL_vulkan.h">
       <Filter>Header Files\SDL2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\plano_api.h">
+      <Filter>Header Files\plano</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\plano_types.h">
+      <Filter>Header Files\plano</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\attribute.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\builders.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\draw_nodes.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\draw_utils.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\drawing.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\example_property_im_draw.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\handle_interactions.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\imgui_stdlib.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\internal.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\stb_image.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plano\include\internal\widgets.h">
+      <Filter>Header Files\plano\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor\crude_json.h">
+      <Filter>Header Files\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor\imgui_bezier_math.h">
+      <Filter>Header Files\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor\imgui_canvas.h">
+      <Filter>Header Files\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor\imgui_extra_math.h">
+      <Filter>Header Files\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor\imgui_node_editor.h">
+      <Filter>Header Files\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui-node-editor\imgui_node_editor_internal.h">
+      <Filter>Header Files\imgui-node-editor</Filter>
+    </ClInclude>
+    <ClInclude Include="plano_properties.h">
+      <Filter>Header Files\plano</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
