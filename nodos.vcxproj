@@ -194,6 +194,7 @@
     <ClInclude Include="..\plano\include\internal\stb_image.h" />
     <ClInclude Include="..\plano\include\internal\widgets.h" />
     <ClInclude Include="..\plano\include\plano_api.h" />
+    <ClInclude Include="..\plano\include\plano_properties.h" />
     <ClInclude Include="..\plano\include\plano_types.h" />
     <ClInclude Include="..\SDL2-2.0.22\include\begin_code.h" />
     <ClInclude Include="..\SDL2-2.0.22\include\close_code.h" />
@@ -284,7 +285,6 @@
     <ClInclude Include="..\SDL2-2.0.22\include\SDL_vulkan.h" />
     <ClInclude Include="node_defs\blueprint_demo.h" />
     <ClInclude Include="node_defs\import_animal.h" />
-    <ClInclude Include="plano_properties.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

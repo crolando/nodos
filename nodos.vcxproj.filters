@@ -478,7 +478,7 @@
     <ClInclude Include="..\imgui-node-editor\imgui_node_editor_internal.h">
       <Filter>Header Files\imgui-node-editor</Filter>
     </ClInclude>
-    <ClInclude Include="plano_properties.h">
+    <ClInclude Include="..\plano\include\plano_properties.h">
       <Filter>Header Files\plano</Filter>
     </ClInclude>
   </ItemGroup>
