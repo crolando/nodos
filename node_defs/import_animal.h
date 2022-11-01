@@ -31,7 +31,7 @@ plano::api::NodeDescription ConstructDefinition(void)
     node.Type = "Import Animal";
 
     plano::api::PinDescription out1;
-    out1.DataType = "String";
+    out1.DataType = plano::types::PinType::String;
     out1.Label = "Animal";
     node.Outputs.push_back(out1);
 

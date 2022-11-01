@@ -3,7 +3,7 @@
 
 #include <plano_api.h>
 #include <internal/imgui_stdlib.h> // For 3-arg text box
-
+using plano::types::PinType;
 namespace node_defs
 {
 namespace blueprint_demo
@@ -27,8 +27,8 @@ namespace InputActionFire
         plano::api::NodeDescription node;
         node.Type = "InputAction Fire";
 
-        node.Outputs.push_back(plano::api::PinDescription("Pressed","Flow"));
-        node.Outputs.push_back(plano::api::PinDescription("Released","Flow"));
+        node.Outputs.push_back(plano::api::PinDescription("Pressed",PinType::Flow));
+        node.Outputs.push_back(plano::api::PinDescription("Released",PinType::Flow));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
@@ -55,10 +55,10 @@ namespace OutputAction
         plano::api::NodeDescription node;
         node.Type = "OutputAction";
 
-        node.Inputs.push_back(plano::api::PinDescription("Sample","Float"));
-        node.Inputs.push_back(plano::api::PinDescription("Condition","Bool"));
+        node.Inputs.push_back(plano::api::PinDescription("Sample",PinType::Float));
+        node.Inputs.push_back(plano::api::PinDescription("Condition",PinType::Bool));
 
-        node.Outputs.push_back(plano::api::PinDescription("Event","Delegate"));
+        node.Outputs.push_back(plano::api::PinDescription("Event",PinType::Delegate));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
@@ -86,11 +86,11 @@ namespace Branch
         plano::api::NodeDescription node;
         node.Type = "Branch";
 
-        node.Inputs.push_back(plano::api::PinDescription("","Flow"));
-        node.Inputs.push_back(plano::api::PinDescription("Condition","Delegate"));
+        node.Inputs.push_back(plano::api::PinDescription("",PinType::Flow));
+        node.Inputs.push_back(plano::api::PinDescription("Condition",PinType::Delegate));
 
-        node.Outputs.push_back(plano::api::PinDescription("True","Flow"));
-        node.Outputs.push_back(plano::api::PinDescription("False","Flow"));
+        node.Outputs.push_back(plano::api::PinDescription("True",PinType::Flow));
+        node.Outputs.push_back(plano::api::PinDescription("False",PinType::Flow));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
@@ -117,12 +117,12 @@ namespace DoN
         plano::api::NodeDescription node;
         node.Type = "DoN";
 
-        node.Inputs.push_back(plano::api::PinDescription("Enter","Flow"));
-        node.Inputs.push_back(plano::api::PinDescription("N","Int"));
-        node.Inputs.push_back(plano::api::PinDescription("Reset","Flow"));
+        node.Inputs.push_back(plano::api::PinDescription("Enter",PinType::Flow));
+        node.Inputs.push_back(plano::api::PinDescription("N",PinType::Int));
+        node.Inputs.push_back(plano::api::PinDescription("Reset",PinType::Flow));
 
-        node.Outputs.push_back(plano::api::PinDescription("Exit","Flow"));
-        node.Outputs.push_back(plano::api::PinDescription("Counter","Int"));
+        node.Outputs.push_back(plano::api::PinDescription("Exit",PinType::Flow));
+        node.Outputs.push_back(plano::api::PinDescription("Counter",PinType::Int));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
@@ -149,13 +149,13 @@ namespace SetTimer
         plano::api::NodeDescription node;
         node.Type = "SetTimer";
 
-        node.Inputs.push_back(plano::api::PinDescription("","Flow"));
-        node.Inputs.push_back(plano::api::PinDescription("Object","Object"));
-        node.Inputs.push_back(plano::api::PinDescription("Function Name","Function"));
-        node.Inputs.push_back(plano::api::PinDescription("Time","Float"));
+        node.Inputs.push_back(plano::api::PinDescription("",PinType::Flow));
+        node.Inputs.push_back(plano::api::PinDescription("Object", PinType::Object));
+        node.Inputs.push_back(plano::api::PinDescription("Function Name",PinType::Function));
+        node.Inputs.push_back(plano::api::PinDescription("Time",PinType::Float));
 
-        node.Inputs.push_back(plano::api::PinDescription("Looping","Bool"));
-        node.Outputs.push_back(plano::api::PinDescription("","Flow"));
+        node.Inputs.push_back(plano::api::PinDescription("Looping",PinType::Bool));
+        node.Outputs.push_back(plano::api::PinDescription("",PinType::Flow));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
@@ -181,18 +181,18 @@ namespace SingleLineTraceByChannel
         plano::api::NodeDescription node;
         node.Type = "SingleLineTraceByChannel";
 
-        node.Inputs.push_back(plano::api::PinDescription("","Flow"));
-        node.Inputs.push_back(plano::api::PinDescription("Start","Flow"));
-        node.Inputs.push_back(plano::api::PinDescription("End","Int"));
-        node.Inputs.push_back(plano::api::PinDescription("Trace Channel","Float"));
-        node.Inputs.push_back(plano::api::PinDescription("Trace Complex","Bool"));
-        node.Inputs.push_back(plano::api::PinDescription("Actors to Ignore","Int"));
-        node.Inputs.push_back(plano::api::PinDescription("Draw Debug Type","Bool"));
-        node.Inputs.push_back(plano::api::PinDescription("Ignore Self","Bool"));
+        node.Inputs.push_back(plano::api::PinDescription("",PinType::Flow));
+        node.Inputs.push_back(plano::api::PinDescription("Start",PinType::Flow));
+        node.Inputs.push_back(plano::api::PinDescription("End",PinType::Int));
+        node.Inputs.push_back(plano::api::PinDescription("Trace Channel",PinType::Float));
+        node.Inputs.push_back(plano::api::PinDescription("Trace Complex",PinType::Bool));
+        node.Inputs.push_back(plano::api::PinDescription("Actors to Ignore",PinType::Int));
+        node.Inputs.push_back(plano::api::PinDescription("Draw Debug Type",PinType::Bool));
+        node.Inputs.push_back(plano::api::PinDescription("Ignore Self",PinType::Bool));
 
-        node.Outputs.push_back(plano::api::PinDescription("","Flow"));
-        node.Outputs.push_back(plano::api::PinDescription("Out Hit","Float"));
-        node.Outputs.push_back(plano::api::PinDescription("Return Value","Bool"));
+        node.Outputs.push_back(plano::api::PinDescription("",PinType::Flow));
+        node.Outputs.push_back(plano::api::PinDescription("Out Hit",PinType::Float));
+        node.Outputs.push_back(plano::api::PinDescription("Return Value",PinType::Bool));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
@@ -218,10 +218,10 @@ namespace PrintString
         plano::api::NodeDescription node;
         node.Type = "PrintString";
 
-        node.Inputs.push_back(plano::api::PinDescription("","Flow"));
-        node.Inputs.push_back(plano::api::PinDescription("In String","String"));
+        node.Inputs.push_back(plano::api::PinDescription("",PinType::Flow));
+        node.Inputs.push_back(plano::api::PinDescription("In String",PinType::String));
 
-        node.Outputs.push_back(plano::api::PinDescription("","Flow"));
+        node.Outputs.push_back(plano::api::PinDescription("",PinType::Flow));
 
         node.InitializeDefaultProperties = Initialize;
         node.DrawAndEditProperties = DrawAndEdit;
