@@ -26,6 +26,7 @@ namespace InputActionFire
     {
         plano::api::NodeDescription node;
         node.Type = "InputAction Fire";
+        node.Color = ImColor(255, 128, 128);
 
         node.Outputs.push_back(plano::api::PinDescription("Pressed",PinType::Flow));
         node.Outputs.push_back(plano::api::PinDescription("Released",PinType::Flow));
@@ -148,6 +149,7 @@ namespace SetTimer
     {
         plano::api::NodeDescription node;
         node.Type = "SetTimer";
+        node.Color = ImColor(128, 195, 248);
 
         node.Inputs.push_back(plano::api::PinDescription("",PinType::Flow));
         node.Inputs.push_back(plano::api::PinDescription("Object", PinType::Object));
@@ -180,6 +182,7 @@ namespace SingleLineTraceByChannel
     {
         plano::api::NodeDescription node;
         node.Type = "SingleLineTraceByChannel";
+        node.Color = ImColor(255, 128, 64);
 
         node.Inputs.push_back(plano::api::PinDescription("",PinType::Flow));
         node.Inputs.push_back(plano::api::PinDescription("Start",PinType::Flow));
