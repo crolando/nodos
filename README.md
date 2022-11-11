@@ -12,8 +12,8 @@ Nodos depends on these packages:
 - [plano](https://github.com/crolando/plano) - sources from github
 
 ## Windows Installation Instructions
-1. Manually ownload the four dependencies, and unzip them into sibling folders named and positioned like this:
-![example_node_siblings](https://user-images.githubusercontent.com/1946494/201411014-c34ffe25-7da4-421c-9b61-fd9ed1ba3216.jpg)
+1. Manually ownload the four dependencies and nodos, and unzip them into sibling folders named and positioned like this:
+![example_node_siblings](https://user-images.githubusercontent.com/1946494/201422130-b5e0532f-9ac7-446f-b60d-7fe183df0702.jpg)
 2. Open the nodos/nodos.vcxproj in Visual Studio 2019
 3. Open the nodos project, and set the Coniguration Properties > Debugging > Environment line to read like this:
    `PATH=%PATH%;$(ProjectDir)..\glew-2.1.0\bin\Release\x64;$(ProjectDir)..\SDL2-2.0.22\lib\x64`
