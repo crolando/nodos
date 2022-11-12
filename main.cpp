@@ -23,25 +23,18 @@
 #define STB_IMAGE_IMPLEMENTATION // image loader needs this...
 #include "internal/stb_image.h"
 
-// we use fopen and Visual Studio doesn't like that.
-// so we tell VS to relax
+// We use fopen and Visual Studio doesn't like that. so we tell VS to relax
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable:4996)
 
-
-// Texture Handling Stuff *****************************************************************************************************
+// Texture Handling Stuff
 #include <unordered_map>
 #include <nodos_texture.h>
-
-// array mapping a GLtexture ID to data
 std::unordered_map<GLuint, nodos_texture> texture_owner;
-// ****************************************************************************************************************************
 
-// Node definitions ******************
+// Node definitions
 #include "node_defs/import_animal.h"
 #include "node_defs/blueprint_demo.h"
-// **************************************
-
 
 // opengl error callback because I don't know what I"m doing
 #ifndef IMGUI_IMPL_OPENGL_ES2
@@ -60,45 +53,38 @@ MessageCallback(GLenum source,
 }
 #endif
 
-// LoadTexture actually uploads the texture to the GPU
+// Implement Plano Callbacks
 ImTextureID plano::api::Application_LoadTexture(const char* path)
-{
-    // This is an abstract container that holds the cpu-program-relevent texture data
-    nodos_texture meta_tex;
+{   
+    // Texture metadata like height/width & layer count.
+    nodos_texture meta_tex; 
 
-    // Load gpu-only pixel data into ram
+    // Load pixel data into ram
     unsigned char* pixels = stbi_load(path, &meta_tex.dim_x, &meta_tex.dim_y, &meta_tex.channel_count, 0);
-
     if (pixels == nullptr) {
         exit(-1);
     }
 
-    
-    GLuint GlTextureId;
     // Ask OpenGl to reserve a space in vram for a "texture object", and store that object's Id number into the 2nd argument.
+    GLuint GlTextureId;    
     glGenTextures(1, &GlTextureId);
 
-    // tell opengl to "plug in" the "texture object ID" into "the GL_TEXTURE_2D Slot of the state machine".
+    // Tell opengl to "plug in" the "texture object ID" into "the GL_TEXTURE_2D Slot of the state machine".
     glBindTexture(GL_TEXTURE_2D, GlTextureId);
     
-    // Upload pixels to GPU, construct texture object, store result in "whatever ID is plugged into the 
-    // GL_TEXTURE_2D slot".  
+    // Upload pixels to GPU, construct texture object, store result in "whatever ID is plugged into the GL_TEXTURE_2D slot".  
     int mip_map_level = 0;
     auto channel_arrangement = GL_RGBA;
     glTexImage2D(GL_TEXTURE_2D, 0, channel_arrangement, meta_tex.dim_x, meta_tex.dim_y, 0, channel_arrangement, GL_UNSIGNED_BYTE, pixels);
 
-    // destroy the ram copy of pixel data, now that it is in vram.
+    // Destroy the ram copy of pixel data, now that it is in vram.
     stbi_image_free(pixels);
 
-    // configure the texture properties
+    // Configure the texture properties
     glGenerateMipmap(GL_TEXTURE_2D);
-
-    // set min filter to linearmipmaplinar
-    // set max filter to linear
     
-    // store the texture 
+    // Store the texture metadata into a list accessed by an ID so we can service the other callbacks.
     texture_owner[GlTextureId] = meta_tex;
-
     return (ImTextureID)GlTextureId;
 }
 
@@ -119,7 +105,7 @@ unsigned int plano::api::Application_GetTextureWidth(ImTextureID texture)
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
 
-    // use hash table to lookup QOpenGLTexture unique pointer
+    // use hash table to lookup the metadata
     return texture_owner[gid].dim_x;
 
 }
@@ -129,7 +115,7 @@ unsigned int plano::api::Application_GetTextureHeight(ImTextureID texture)
     //restore our GLuint from our void*
     GLuint gid = (GLuint)texture;
 
-    // use hash table to lookup QOpenGLTexture unique pointer
+    // use hash table to lookup the metadata
     return texture_owner[gid].dim_y;
 }
 
@@ -166,8 +152,7 @@ void Init(void)
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
 
-    // Pattern for restoring our project files
-    
+    // Load the project file     
     std::ifstream inf("nodos_project.txt");
     std::stringstream ssbuf;
     ssbuf << inf.rdbuf();
@@ -176,15 +161,9 @@ void Init(void)
     plano::api::LoadNodesAndLinksFromBuffer(size, sbuf.c_str());
 }
 
-
-
-
-// *******************************************************************************************************************
-
-// Main code
+// Main 
 int main(int, char**)
 {
-    fprintf(stderr,"hello world - error channel\n");
     // Setup SDL
     // (Some versions of SDL before <2.0.10 appears to have performance/stalling issues on a minority of Windows systems,
     // depending on whether SDL_INIT_GAMECONTROLLER is enabled or disabled.. updating to latest version of SDL is recommended!)
@@ -195,28 +174,28 @@ int main(int, char**)
     }
 
     // Decide GL+GLSL versions
-#if defined(IMGUI_IMPL_OPENGL_ES2)
+    #if defined(IMGUI_IMPL_OPENGL_ES2)
     // GL ES 2.0 + GLSL 100
     const char* glsl_version = "#version 100";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-#elif defined(__APPLE__)
+    #elif defined(__APPLE__)
     // GL 3.2 Core + GLSL 150
     const char* glsl_version = "#version 150";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG); // Always required on Mac
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-#else
+    #else
     // GL 3.0 + GLSL 130
     const char* glsl_version = "#version 130";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-#endif
+    #endif
 
     // Create window with graphics context
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -229,34 +208,35 @@ int main(int, char**)
     SDL_GL_SetSwapInterval(1); // Enable vsync
 
     // Initialize OpenGL loader
-#if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
+    #if defined(IMGUI_IMPL_OPENGL_LOADER_GL3W)
     bool err = gl3wInit() != 0;
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
+    #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLEW)
     bool err = glewInit() != GLEW_OK;
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
+    #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD)
     bool err = gladLoadGL() == 0;
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD2)
+    #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLAD2)
     bool err = gladLoadGL((GLADloadfunc)SDL_GL_GetProcAddress) == 0; // glad2 recommend using the windowing library loader instead of the (optionally) bundled one.
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING2)
+    #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING2)
     bool err = false;
     glbinding::Binding::initialize();
-#elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING3)
+    #elif defined(IMGUI_IMPL_OPENGL_LOADER_GLBINDING3)
     bool err = false;
     glbinding::initialize([](const char* name) { return (glbinding::ProcAddress)SDL_GL_GetProcAddress(name); });
-#else
+    #else
     bool err = false; // If you use IMGUI_IMPL_OPENGL_LOADER_CUSTOM, your loader is likely to requires some form of initialization.
-#endif
+    #endif
     if (err)
     {
         fprintf(stderr, "Failed to initialize OpenGL loader!\n");
         return 1;
     }
 
-    // register opengl error handler callback:
-#ifndef IMGUI_IMPL_OPENGL_ES2
+    // Register opengl error handler callback:
+    #ifndef IMGUI_IMPL_OPENGL_ES2
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
-#endif
+    #endif
+
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -287,18 +267,15 @@ int main(int, char**)
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != NULL);
 
-    // Our state
+    // Variables to track sample window behaviors
     bool show_demo_window = true;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-
-    // node startup
+    // Plano startup. Register nodes. 
     Init();
 
-
-
-    // Main loop
+    // Main draw loop
     bool done = false;
     while (!done)
     {
@@ -322,13 +299,14 @@ int main(int, char**)
         ImGui_ImplSDL2_NewFrame(window);
         ImGui::NewFrame();
 
+        // 1. Show the plano node graph window
         plano::api::Frame();
 
-        // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
+        // 2. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
 
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
+        // 3. Show a simple window that we create ourselves. We use a Begin/End pair to created a named window.
         {
             static float f = 0.0f;
             static int counter = 0;
@@ -351,7 +329,7 @@ int main(int, char**)
             ImGui::End();
         }
 
-        // 3. Show another simple window.
+        // 4. Show another simple window.
         if (show_another_window)
         {
             ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
@@ -361,16 +339,16 @@ int main(int, char**)
             ImGui::End();
         }
 
-        // Rendering
+        // Rendering 
         ImGui::Render();
         glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
         glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         SDL_GL_SwapWindow(window);
-    }
+    } // End of draw loop.  Shutdown requested beyond here...
 
-    // write save file
+    // Write save file
     size_t size;
     char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&size);
     // Save "size" count characters from "cbuffer" to a file.
