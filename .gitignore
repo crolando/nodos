@@ -402,3 +402,11 @@ nodos_project.txt
 plano_properties.h
 project - Copy.txt
 nodos_project - Copy.txt
+
+# Xcode stuff
+## User settings
+xcuserdata/
+
+## Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
