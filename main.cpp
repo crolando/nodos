@@ -29,7 +29,7 @@
 
 // Texture Handling Stuff
 #include <unordered_map>
-#include <nodos_texture.h>
+#include "nodos_texture.h"
 std::unordered_map<GLuint, nodos_texture> texture_owner;
 
 // Node definitions
@@ -91,7 +91,7 @@ ImTextureID plano::api::Application_LoadTexture(const char* path)
 void plano::api::Application_DestroyTexture(ImTextureID texture)
 {
     //restore our GLuint from our void*
-    GLuint gid = (GLuint)texture;
+    GLuint gid = (GLuint)(size_t)texture;
 
     //delete the texture on the graphics card side.
     glDeleteTextures(0, &gid);
@@ -103,7 +103,7 @@ void plano::api::Application_DestroyTexture(ImTextureID texture)
 unsigned int plano::api::Application_GetTextureWidth(ImTextureID texture)
 {
     //restore our GLuint from our void*
-    GLuint gid = (GLuint)texture;
+    GLuint gid = (GLuint)(size_t)texture;
 
     // use hash table to lookup the metadata
     return texture_owner[gid].dim_x;
@@ -113,7 +113,7 @@ unsigned int plano::api::Application_GetTextureWidth(ImTextureID texture)
 unsigned int plano::api::Application_GetTextureHeight(ImTextureID texture)
 {
     //restore our GLuint from our void*
-    GLuint gid = (GLuint)texture;
+    GLuint gid = (GLuint)(size_t)texture;
 
     // use hash table to lookup the metadata
     return texture_owner[gid].dim_y;
@@ -232,7 +232,7 @@ int main(int, char**)
     }
 
     // Register opengl error handler callback:
-    #ifndef IMGUI_IMPL_OPENGL_ES2
+    #if !defined(__APPLE__) && !defined(IMGUI_IMPL_OPENGL_ES2)
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(MessageCallback, 0);
     #endif

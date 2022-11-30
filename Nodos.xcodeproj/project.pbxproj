@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3779BA7D2933A57700AD8A46 /* imgui_impl_opengl3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA772933A57600AD8A46 /* imgui_impl_opengl3.cpp */; };
+		3779BA7E2933A57700AD8A46 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA792933A57700AD8A46 /* main.cpp */; };
+		3779BA7F2933A57700AD8A46 /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA7B2933A57700AD8A46 /* imgui_impl_sdl.cpp */; };
+		3779BA902936B54F00AD8A46 /* attribute.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA832936B54E00AD8A46 /* attribute.cpp */; };
+		3779BA912936B54F00AD8A46 /* builders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA842936B54E00AD8A46 /* builders.cpp */; };
+		3779BA922936B54F00AD8A46 /* draw_nodes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA852936B54E00AD8A46 /* draw_nodes.cpp */; };
+		3779BA932936B54F00AD8A46 /* backend_io.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA862936B54F00AD8A46 /* backend_io.cpp */; };
+		3779BA942936B54F00AD8A46 /* internal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA872936B54F00AD8A46 /* internal.cpp */; };
+		3779BA952936B54F00AD8A46 /* example_property_im_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA882936B54F00AD8A46 /* example_property_im_draw.cpp */; };
+		3779BA962936B54F00AD8A46 /* widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA892936B54F00AD8A46 /* widgets.cpp */; };
+		3779BA972936B54F00AD8A46 /* node_registry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA8A2936B54F00AD8A46 /* node_registry.cpp */; };
+		3779BA982936B54F00AD8A46 /* handle_interactions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA8B2936B54F00AD8A46 /* handle_interactions.cpp */; };
+		3779BA992936B54F00AD8A46 /* imgui_stdlib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA8C2936B54F00AD8A46 /* imgui_stdlib.cpp */; };
+		3779BA9A2936B54F00AD8A46 /* drawing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA8D2936B54F00AD8A46 /* drawing.cpp */; };
+		3779BA9B2936B54F00AD8A46 /* frame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA8E2936B54F00AD8A46 /* frame.cpp */; };
+		3779BA9C2936B54F00AD8A46 /* plano_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA8F2936B54F00AD8A46 /* plano_api.cpp */; };
+		3779BAA12936B56D00AD8A46 /* imgui_canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA9D2936B56D00AD8A46 /* imgui_canvas.cpp */; };
+		3779BAA22936B56D00AD8A46 /* imgui_node_editor_api.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA9E2936B56D00AD8A46 /* imgui_node_editor_api.cpp */; };
+		3779BAA32936B56D00AD8A46 /* crude_json.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BA9F2936B56D00AD8A46 /* crude_json.cpp */; };
+		3779BAA42936B56D00AD8A46 /* imgui_node_editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BAA02936B56D00AD8A46 /* imgui_node_editor.cpp */; };
+		3779BAA62936B65800AD8A46 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BAA52936B65800AD8A46 /* imgui.cpp */; };
+		3779BAAB2936B87600AD8A46 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BAA72936B87600AD8A46 /* imgui_demo.cpp */; };
+		3779BAAC2936B87600AD8A46 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BAA82936B87600AD8A46 /* imgui_tables.cpp */; };
+		3779BAAD2936B87600AD8A46 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */; };
+		3779BAAE2936B87600AD8A46 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3779BA67292E7D1500AD8A46 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3779BA69292E7D1500AD8A46 /* Nodos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Nodos; sourceTree = BUILT_PRODUCTS_DIR; };
+		3779BA74292E7DDC00AD8A46 /* Library */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Library; path = ../../../../Library; sourceTree = "<group>"; };
+		3779BA752933A57600AD8A46 /* imgui_impl_opengl3_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3_loader.h; sourceTree = "<group>"; };
+		3779BA762933A57600AD8A46 /* nodos_texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nodos_texture.h; sourceTree = "<group>"; };
+		3779BA772933A57600AD8A46 /* imgui_impl_opengl3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_opengl3.cpp; sourceTree = "<group>"; };
+		3779BA782933A57700AD8A46 /* imgui_impl_sdl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_sdl.h; sourceTree = "<group>"; };
+		3779BA792933A57700AD8A46 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3779BA7A2933A57700AD8A46 /* node_defs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = node_defs; sourceTree = "<group>"; };
+		3779BA7B2933A57700AD8A46 /* imgui_impl_sdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_sdl.cpp; sourceTree = "<group>"; };
+		3779BA7C2933A57700AD8A46 /* imgui_impl_opengl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_opengl3.h; sourceTree = "<group>"; };
+		3779BA832936B54E00AD8A46 /* attribute.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = attribute.cpp; path = ../plano/src/attribute.cpp; sourceTree = "<group>"; };
+		3779BA842936B54E00AD8A46 /* builders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = builders.cpp; path = ../plano/src/builders.cpp; sourceTree = "<group>"; };
+		3779BA852936B54E00AD8A46 /* draw_nodes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = draw_nodes.cpp; path = ../plano/src/draw_nodes.cpp; sourceTree = "<group>"; };
+		3779BA862936B54F00AD8A46 /* backend_io.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = backend_io.cpp; path = ../plano/src/backend_io.cpp; sourceTree = "<group>"; };
+		3779BA872936B54F00AD8A46 /* internal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = internal.cpp; path = ../plano/src/internal.cpp; sourceTree = "<group>"; };
+		3779BA882936B54F00AD8A46 /* example_property_im_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = example_property_im_draw.cpp; path = ../plano/src/example_property_im_draw.cpp; sourceTree = "<group>"; };
+		3779BA892936B54F00AD8A46 /* widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = widgets.cpp; path = ../plano/src/widgets.cpp; sourceTree = "<group>"; };
+		3779BA8A2936B54F00AD8A46 /* node_registry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = node_registry.cpp; path = ../plano/src/node_registry.cpp; sourceTree = "<group>"; };
+		3779BA8B2936B54F00AD8A46 /* handle_interactions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = handle_interactions.cpp; path = ../plano/src/handle_interactions.cpp; sourceTree = "<group>"; };
+		3779BA8C2936B54F00AD8A46 /* imgui_stdlib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_stdlib.cpp; path = ../plano/src/imgui_stdlib.cpp; sourceTree = "<group>"; };
+		3779BA8D2936B54F00AD8A46 /* drawing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = drawing.cpp; path = ../plano/src/drawing.cpp; sourceTree = "<group>"; };
+		3779BA8E2936B54F00AD8A46 /* frame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = frame.cpp; path = ../plano/src/frame.cpp; sourceTree = "<group>"; };
+		3779BA8F2936B54F00AD8A46 /* plano_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = plano_api.cpp; path = ../plano/src/plano_api.cpp; sourceTree = "<group>"; };
+		3779BA9D2936B56D00AD8A46 /* imgui_canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_canvas.cpp; path = "../imgui-node-editor/imgui_canvas.cpp"; sourceTree = "<group>"; };
+		3779BA9E2936B56D00AD8A46 /* imgui_node_editor_api.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_node_editor_api.cpp; path = "../imgui-node-editor/imgui_node_editor_api.cpp"; sourceTree = "<group>"; };
+		3779BA9F2936B56D00AD8A46 /* crude_json.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = crude_json.cpp; path = "../imgui-node-editor/crude_json.cpp"; sourceTree = "<group>"; };
+		3779BAA02936B56D00AD8A46 /* imgui_node_editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_node_editor.cpp; path = "../imgui-node-editor/imgui_node_editor.cpp"; sourceTree = "<group>"; };
+		3779BAA52936B65800AD8A46 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui.cpp; path = "../imgui-node-editor/external/imgui/imgui.cpp"; sourceTree = "<group>"; };
+		3779BAA72936B87600AD8A46 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_demo.cpp; path = "../imgui-node-editor/external/imgui/imgui_demo.cpp"; sourceTree = "<group>"; };
+		3779BAA82936B87600AD8A46 /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_tables.cpp; path = "../imgui-node-editor/external/imgui/imgui_tables.cpp"; sourceTree = "<group>"; };
+		3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_widgets.cpp; path = "../imgui-node-editor/external/imgui/imgui_widgets.cpp"; sourceTree = "<group>"; };
+		3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_draw.cpp; path = "../imgui-node-editor/external/imgui/imgui_draw.cpp"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3779BA66292E7D1500AD8A46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3779BA60292E7D1500AD8A46 = {
+			isa = PBXGroup;
+			children = (
+				3779BAA52936B65800AD8A46 /* imgui.cpp */,
+				3779BAA72936B87600AD8A46 /* imgui_demo.cpp */,
+				3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */,
+				3779BAA82936B87600AD8A46 /* imgui_tables.cpp */,
+				3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */,
+				3779BA9F2936B56D00AD8A46 /* crude_json.cpp */,
+				3779BA9D2936B56D00AD8A46 /* imgui_canvas.cpp */,
+				3779BA9E2936B56D00AD8A46 /* imgui_node_editor_api.cpp */,
+				3779BAA02936B56D00AD8A46 /* imgui_node_editor.cpp */,
+				3779BA832936B54E00AD8A46 /* attribute.cpp */,
+				3779BA862936B54F00AD8A46 /* backend_io.cpp */,
+				3779BA842936B54E00AD8A46 /* builders.cpp */,
+				3779BA852936B54E00AD8A46 /* draw_nodes.cpp */,
+				3779BA8D2936B54F00AD8A46 /* drawing.cpp */,
+				3779BA882936B54F00AD8A46 /* example_property_im_draw.cpp */,
+				3779BA8E2936B54F00AD8A46 /* frame.cpp */,
+				3779BA8B2936B54F00AD8A46 /* handle_interactions.cpp */,
+				3779BA8C2936B54F00AD8A46 /* imgui_stdlib.cpp */,
+				3779BA872936B54F00AD8A46 /* internal.cpp */,
+				3779BA8A2936B54F00AD8A46 /* node_registry.cpp */,
+				3779BA8F2936B54F00AD8A46 /* plano_api.cpp */,
+				3779BA892936B54F00AD8A46 /* widgets.cpp */,
+				3779BA752933A57600AD8A46 /* imgui_impl_opengl3_loader.h */,
+				3779BA772933A57600AD8A46 /* imgui_impl_opengl3.cpp */,
+				3779BA7C2933A57700AD8A46 /* imgui_impl_opengl3.h */,
+				3779BA7B2933A57700AD8A46 /* imgui_impl_sdl.cpp */,
+				3779BA782933A57700AD8A46 /* imgui_impl_sdl.h */,
+				3779BA792933A57700AD8A46 /* main.cpp */,
+				3779BA7A2933A57700AD8A46 /* node_defs */,
+				3779BA762933A57600AD8A46 /* nodos_texture.h */,
+				3779BA6A292E7D1500AD8A46 /* Products */,
+				3779BA73292E7D8500AD8A46 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3779BA6A292E7D1500AD8A46 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3779BA69292E7D1500AD8A46 /* Nodos */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3779BA73292E7D8500AD8A46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3779BA74292E7DDC00AD8A46 /* Library */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3779BA68292E7D1500AD8A46 /* Nodos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3779BA70292E7D1500AD8A46 /* Build configuration list for PBXNativeTarget "Nodos" */;
+			buildPhases = (
+				3779BA65292E7D1500AD8A46 /* Sources */,
+				3779BA66292E7D1500AD8A46 /* Frameworks */,
+				3779BA67292E7D1500AD8A46 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nodos;
+			productName = Nodos;
+			productReference = 3779BA69292E7D1500AD8A46 /* Nodos */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3779BA61292E7D1500AD8A46 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1410;
+				TargetAttributes = {
+					3779BA68292E7D1500AD8A46 = {
+						CreatedOnToolsVersion = 14.1;
+					};
+				};
+			};
+			buildConfigurationList = 3779BA64292E7D1500AD8A46 /* Build configuration list for PBXProject "Nodos" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3779BA60292E7D1500AD8A46;
+			productRefGroup = 3779BA6A292E7D1500AD8A46 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3779BA68292E7D1500AD8A46 /* Nodos */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3779BA65292E7D1500AD8A46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3779BA7E2933A57700AD8A46 /* main.cpp in Sources */,
+				3779BAA22936B56D00AD8A46 /* imgui_node_editor_api.cpp in Sources */,
+				3779BA9C2936B54F00AD8A46 /* plano_api.cpp in Sources */,
+				3779BA922936B54F00AD8A46 /* draw_nodes.cpp in Sources */,
+				3779BA982936B54F00AD8A46 /* handle_interactions.cpp in Sources */,
+				3779BAA62936B65800AD8A46 /* imgui.cpp in Sources */,
+				3779BAA32936B56D00AD8A46 /* crude_json.cpp in Sources */,
+				3779BA952936B54F00AD8A46 /* example_property_im_draw.cpp in Sources */,
+				3779BAAE2936B87600AD8A46 /* imgui_draw.cpp in Sources */,
+				3779BA992936B54F00AD8A46 /* imgui_stdlib.cpp in Sources */,
+				3779BAA42936B56D00AD8A46 /* imgui_node_editor.cpp in Sources */,
+				3779BA962936B54F00AD8A46 /* widgets.cpp in Sources */,
+				3779BA9A2936B54F00AD8A46 /* drawing.cpp in Sources */,
+				3779BA942936B54F00AD8A46 /* internal.cpp in Sources */,
+				3779BA7D2933A57700AD8A46 /* imgui_impl_opengl3.cpp in Sources */,
+				3779BA902936B54F00AD8A46 /* attribute.cpp in Sources */,
+				3779BA7F2933A57700AD8A46 /* imgui_impl_sdl.cpp in Sources */,
+				3779BAAB2936B87600AD8A46 /* imgui_demo.cpp in Sources */,
+				3779BA9B2936B54F00AD8A46 /* frame.cpp in Sources */,
+				3779BA972936B54F00AD8A46 /* node_registry.cpp in Sources */,
+				3779BAAD2936B87600AD8A46 /* imgui_widgets.cpp in Sources */,
+				3779BA912936B54F00AD8A46 /* builders.cpp in Sources */,
+				3779BAAC2936B87600AD8A46 /* imgui_tables.cpp in Sources */,
+				3779BA932936B54F00AD8A46 /* backend_io.cpp in Sources */,
+				3779BAA12936B56D00AD8A46 /* imgui_canvas.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3779BA6E292E7D1500AD8A46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/opt/homebrew/include/**",
+					"../plano/**",
+					"../imgui-node-editor/**",
+				);
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lGLEW",
+					"-lSDL2",
+					"-framework",
+					OpenGL,
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3779BA6F292E7D1500AD8A46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/opt/homebrew/include/**",
+					"../plano/**",
+					"../imgui-node-editor/**",
+				);
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				LIBRARY_SEARCH_PATHS = /opt/homebrew/lib;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-lGLEW",
+					"-lSDL2",
+					"-framework",
+					OpenGL,
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3779BA71292E7D1500AD8A46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3779BA72292E7D1500AD8A46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3779BA64292E7D1500AD8A46 /* Build configuration list for PBXProject "Nodos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3779BA6E292E7D1500AD8A46 /* Debug */,
+				3779BA6F292E7D1500AD8A46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3779BA70292E7D1500AD8A46 /* Build configuration list for PBXNativeTarget "Nodos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3779BA71292E7D1500AD8A46 /* Debug */,
+				3779BA72292E7D1500AD8A46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3779BA61292E7D1500AD8A46 /* Project object */;
+}
