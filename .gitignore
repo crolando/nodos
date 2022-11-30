@@ -410,3 +410,9 @@ xcuserdata/
 ## Xcode 8 and earlier
 *.xcscmblueprint
 *.xccheckout
+
+# Mac stuff
+# OS-specific files
+.DS_Store
+.Trashes
+Thumbs.db
