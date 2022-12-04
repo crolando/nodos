@@ -69,16 +69,20 @@ namespace OutputAction
 
 namespace Branch
 {
-    void Initialize(Properties& Properties)
+    void Initialize(Properties& p)
     {
-        Properties.set_attr("button","Hello");
+        p.pint["buttonvalue"] ;
     }
 
-    void DrawAndEdit(Properties& Properties)
+    void DrawAndEdit(Properties& p)
     {
-        auto input = Properties.get_attr("button").get_string();
-        ImGui::SmallButton(input.c_str());
-        Properties.set_attr("button",input);
+        auto input = p.pstring["button"];
+        if (ImGui::SmallButton("More")) {
+            p.pint["buttonValue"]++;
+        }
+        ImGui::SameLine();
+        ImGui::Text("%i",p.pint["buttonValue"]);
+        
     }
 
 
