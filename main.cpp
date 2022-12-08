@@ -35,6 +35,7 @@ std::unordered_map<GLuint, nodos_texture> texture_owner;
 // Node definitions
 #include "node_defs/import_animal.h"
 #include "node_defs/blueprint_demo.h"
+#include "node_defs/widget_demo.h"
 
 // opengl error callback because I don't know what I"m doing
 #ifndef IMGUI_IMPL_OPENGL_ES2
@@ -151,7 +152,8 @@ void Init(void)
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
-
+    plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
+    
     // Load the project file     
     std::ifstream inf("nodos_project.txt");
     std::stringstream ssbuf;
