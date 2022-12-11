@@ -79,6 +79,8 @@
 		3779BAA82936B87600AD8A46 /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_tables.cpp; path = "../imgui-node-editor/external/imgui/imgui_tables.cpp"; sourceTree = "<group>"; };
 		3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_widgets.cpp; path = "../imgui-node-editor/external/imgui/imgui_widgets.cpp"; sourceTree = "<group>"; };
 		3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_draw.cpp; path = "../imgui-node-editor/external/imgui/imgui_draw.cpp"; sourceTree = "<group>"; };
+		37F0DB0F2941655800DC7360 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../plano/include; sourceTree = "<group>"; };
+		37F0DB1029417F3900DC7360 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui.h; path = "../imgui-node-editor/external/imgui/imgui.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,38 +97,40 @@
 		3779BA60292E7D1500AD8A46 = {
 			isa = PBXGroup;
 			children = (
-				3779BAA52936B65800AD8A46 /* imgui.cpp */,
-				3779BAA72936B87600AD8A46 /* imgui_demo.cpp */,
-				3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */,
-				3779BAA82936B87600AD8A46 /* imgui_tables.cpp */,
-				3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */,
-				3779BA9F2936B56D00AD8A46 /* crude_json.cpp */,
-				3779BA9D2936B56D00AD8A46 /* imgui_canvas.cpp */,
-				3779BA9E2936B56D00AD8A46 /* imgui_node_editor_api.cpp */,
-				3779BAA02936B56D00AD8A46 /* imgui_node_editor.cpp */,
+				37F0DB0F2941655800DC7360 /* include */,
+				3779BA7A2933A57700AD8A46 /* node_defs */,
 				3779BA832936B54E00AD8A46 /* attribute.cpp */,
 				3779BA862936B54F00AD8A46 /* backend_io.cpp */,
 				3779BA842936B54E00AD8A46 /* builders.cpp */,
+				3779BA9F2936B56D00AD8A46 /* crude_json.cpp */,
 				3779BA852936B54E00AD8A46 /* draw_nodes.cpp */,
 				3779BA8D2936B54F00AD8A46 /* drawing.cpp */,
 				3779BA882936B54F00AD8A46 /* example_property_im_draw.cpp */,
 				3779BA8E2936B54F00AD8A46 /* frame.cpp */,
 				3779BA8B2936B54F00AD8A46 /* handle_interactions.cpp */,
+				3779BA9D2936B56D00AD8A46 /* imgui_canvas.cpp */,
+				3779BAA72936B87600AD8A46 /* imgui_demo.cpp */,
+				3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */,
+				3779BA772933A57600AD8A46 /* imgui_impl_opengl3.cpp */,
+				3779BA7B2933A57700AD8A46 /* imgui_impl_sdl.cpp */,
+				3779BA9E2936B56D00AD8A46 /* imgui_node_editor_api.cpp */,
+				3779BAA02936B56D00AD8A46 /* imgui_node_editor.cpp */,
 				3779BA8C2936B54F00AD8A46 /* imgui_stdlib.cpp */,
+				3779BAA82936B87600AD8A46 /* imgui_tables.cpp */,
+				3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */,
+				3779BAA52936B65800AD8A46 /* imgui.cpp */,
 				3779BA872936B54F00AD8A46 /* internal.cpp */,
+				3779BA792933A57700AD8A46 /* main.cpp */,
 				3779BA8A2936B54F00AD8A46 /* node_registry.cpp */,
 				3779BA8F2936B54F00AD8A46 /* plano_api.cpp */,
 				3779BA892936B54F00AD8A46 /* widgets.cpp */,
 				3779BA752933A57600AD8A46 /* imgui_impl_opengl3_loader.h */,
-				3779BA772933A57600AD8A46 /* imgui_impl_opengl3.cpp */,
 				3779BA7C2933A57700AD8A46 /* imgui_impl_opengl3.h */,
-				3779BA7B2933A57700AD8A46 /* imgui_impl_sdl.cpp */,
 				3779BA782933A57700AD8A46 /* imgui_impl_sdl.h */,
-				3779BA792933A57700AD8A46 /* main.cpp */,
-				3779BA7A2933A57700AD8A46 /* node_defs */,
+				37F0DB1029417F3900DC7360 /* imgui.h */,
 				3779BA762933A57600AD8A46 /* nodos_texture.h */,
-				3779BA6A292E7D1500AD8A46 /* Products */,
 				3779BA73292E7D8500AD8A46 /* Frameworks */,
+				3779BA6A292E7D1500AD8A46 /* Products */,
 			);
 			sourceTree = "<group>";
 		};

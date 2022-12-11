@@ -153,6 +153,7 @@ void Init(void)
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
     
     // Load the project file     
     std::ifstream inf("nodos_project.txt");

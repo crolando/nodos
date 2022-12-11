@@ -97,7 +97,68 @@ plano::api::NodeDescription ConstructDefinition(void)
     node.DrawAndEditProperties = DrawAndEdit;
     return node;
 }
+} // basic widgets
+namespace TreeDemo {
+void Initialize(Properties& p)
+{
+    return;
 }
-}
-}
+
+void DrawAndEdit(Properties& p)
+{
+    // Tree widgets "stretch to fill whatever space is available" in their parent.
+    // There is a shortcoming with the node: they cannot
+    // tell their children how big they are.  So, Tree widgets are not drawn correctly when placed inside nodes.
+    // However, there is a hack that works around this.  We can manually instantiate a column of a fixed width in the node,
+    // and this provides the information trees need to dispaly correctly.
+    int width = 135;
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+    ImGui::Dummy(ImVec2(width, 0));
+    ImGui::PopStyleVar();
+    
+    // Start columns, but use only first one.
+    ImGui::BeginColumns("##TreeColumns", 2,
+        ImGuiOldColumnFlags_NoBorder |
+        ImGuiOldColumnFlags_NoResize |
+        ImGuiOldColumnFlags_NoPreserveWidths |
+        ImGuiOldColumnFlags_NoForceWithinWindow);
+
+    // Adjust column width to match requested one.
+    ImGui::SetColumnWidth(0, width
+        + ImGui::GetStyle().WindowPadding.x
+        + ImGui::GetStyle().ItemSpacing.x);
+    
+    // Back to normal ImGui drawing, in our column.
+    if (ImGui::CollapsingHeader("Open Header"))
+    {
+        ImGui::Text("Hello There");
+        if (ImGui::TreeNode("Open Tree")) {
+            ImGui::Text("Checked: %s", p.pbool["check"] ? "true" : "false");
+            ImGui::Checkbox("Option 1", &p.pbool["check"]);
+            ImGui::TreePop();
+        }
+    }
+    
+    // Tree Column Shutdown
+    ImGui::EndColumns();
+    
+    
+    
+    return;
+} // draw and edit
+
+plano::api::NodeDescription ConstructDefinition(void)
+{
+    plano::api::NodeDescription node;
+    node.Type = "TreeDemo";
+    node.Inputs.push_back(plano::api::PinDescription("Enter",PinType::Flow));
+    node.Outputs.push_back(plano::api::PinDescription("Exit",PinType::Flow));
+    node.InitializeDefaultProperties = Initialize;
+    node.DrawAndEditProperties = DrawAndEdit;
+    return node;
+} // construct defintion
+
+} // tree demo
+} // widget demo
+} // node defs
 #endif
