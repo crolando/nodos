@@ -91,6 +91,7 @@ plano::api::NodeDescription ConstructDefinition(void)
 {
     plano::api::NodeDescription node;
     node.Type = "BasicWidgets";
+    node.Color = ImColor(128, 195, 248);
     node.Inputs.push_back(plano::api::PinDescription("Enter",PinType::Flow));
     node.Outputs.push_back(plano::api::PinDescription("Exit",PinType::Flow));
     node.InitializeDefaultProperties = Initialize;
@@ -151,6 +152,7 @@ plano::api::NodeDescription ConstructDefinition(void)
 {
     plano::api::NodeDescription node;
     node.Type = "TreeDemo";
+    node.Color = ImColor(255, 128, 64);
     node.Inputs.push_back(plano::api::PinDescription("Enter",PinType::Flow));
     node.Outputs.push_back(plano::api::PinDescription("Exit",PinType::Flow));
     node.InitializeDefaultProperties = Initialize;
@@ -195,6 +197,7 @@ plano::api::NodeDescription ConstructDefinition(void)
 {
     plano::api::NodeDescription node;
     node.Type = "PlotDemo";
+    node.Color = ImColor(255, 128, 128);
     node.Inputs.push_back(plano::api::PinDescription("Enter",PinType::Flow));
     node.Outputs.push_back(plano::api::PinDescription("Exit",PinType::Flow));
     node.InitializeDefaultProperties = Initialize;
