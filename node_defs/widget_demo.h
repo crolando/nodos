@@ -159,6 +159,49 @@ plano::api::NodeDescription ConstructDefinition(void)
 } // construct defintion
 
 } // tree demo
+
+namespace PlotDemo {
+
+void Initialize(Properties& p)
+{
+    return;
+}
+
+void DrawAndEdit(Properties& p)
+{
+    // Animate some runtime data
+    static float progress = 0.0f, progress_dir = 1.0f;
+    progress += progress_dir * 0.4f * ImGui::GetIO().DeltaTime;
+    if (progress >= +1.1f) { progress = +1.1f; progress_dir *= -1.0f; }
+    if (progress <= -0.1f) { progress = -0.1f; progress_dir *= -1.0f; }
+
+    // We must specify the ProgressBar's width.
+    static ImVec2 bar_size = ImVec2(200.0f, 0.0f);
+    
+    // Progress bar with percent text
+    ImGui::ProgressBar(progress, bar_size);
+    ImGui::SameLine();
+    ImGui::Text("Progress Bar");
+    
+    // Progress bar with custom text
+    float progress_saturated = (progress < 0.0f) ? 0.0f : (progress > 1.0f) ? 1.0f : progress;
+    char buf[32];
+    snprintf(buf, 32 ,"%d/%d", (int)(progress_saturated * 1753), 1753);
+    ImGui::ProgressBar(progress, bar_size, buf);
+    
+}
+
+plano::api::NodeDescription ConstructDefinition(void)
+{
+    plano::api::NodeDescription node;
+    node.Type = "PlotDemo";
+    node.Inputs.push_back(plano::api::PinDescription("Enter",PinType::Flow));
+    node.Outputs.push_back(plano::api::PinDescription("Exit",PinType::Flow));
+    node.InitializeDefaultProperties = Initialize;
+    node.DrawAndEditProperties = DrawAndEdit;
+    return node;
+} // construct defintion
+} // plot demo
 } // widget demo
 } // node defs
 #endif
