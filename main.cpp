@@ -37,22 +37,6 @@ std::unordered_map<GLuint, nodos_texture> texture_owner;
 #include "node_defs/blueprint_demo.h"
 #include "node_defs/widget_demo.h"
 
-// opengl error callback because I don't know what I"m doing
-#ifndef IMGUI_IMPL_OPENGL_ES2
-void GLAPIENTRY
-MessageCallback(GLenum source,
-    GLenum type,
-    GLuint id,
-    GLenum severity,
-    GLsizei length,
-    const GLchar* message,
-    const void* userParam)
-{
-    fprintf(stdout, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
-        type, severity, message);
-}
-#endif
 
 // Implement Plano Callbacks
 ImTextureID plano::api::Application_LoadTexture(const char* path)
@@ -118,51 +102,6 @@ unsigned int plano::api::Application_GetTextureHeight(ImTextureID texture)
 
     // use hash table to lookup the metadata
     return texture_owner[gid].dim_y;
-}
-
-void Init(void)
-{
-
-    // There is a ImGui context with the default font.
-    // Build a custom font atlas and replace the default one.
-    const ImWchar ranges[] =
-    {
-        0x0020, 0x00FF, // Basic Latin + Latin Supplement
-        0x0104, 0x017C, // Polish characters and more
-        0,
-    };
-
-    ImFontConfig config;
-    config.OversampleH = 4;
-    config.OversampleV = 4;
-    config.PixelSnapH = false;
-
-    //ImFontAtlas* fa = ImGui::GetIO().Fonts;
-    //fa->AddFontFromFileTTF("..\\qt-imgui-nodes\\Data\\selawk.ttf", 22.0f, &config, ranges);
-    //fa->Build();
-
-    // Now that there's an opengl context, we can init the node editor
-    plano::api::SetContext(plano::api::CreateContext());
-    plano::api::Initialize();
-    plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::DoN::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
-    plano::api::RegisterNewNode(node_defs::widget_demo::PlotDemo::ConstructDefinition());
-    
-    // Load the project file     
-    std::ifstream inf("nodos_project.txt");
-    std::stringstream ssbuf;
-    ssbuf << inf.rdbuf();
-    std::string sbuf = ssbuf.str();
-    size_t size = sbuf.size();
-    plano::api::LoadNodesAndLinksFromBuffer(size, sbuf.c_str());
 }
 
 // Main 
@@ -235,50 +174,46 @@ int main(int, char**)
         return 1;
     }
 
-    // Register opengl error handler callback:
-    #if !defined(__APPLE__) && !defined(IMGUI_IMPL_OPENGL_ES2)
-    glEnable(GL_DEBUG_OUTPUT);
-    glDebugMessageCallback(MessageCallback, 0);
-    #endif
-
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-
-    // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
-    //ImGui::StyleColorsClassic();
-
+    ImGui::StyleColorsDark(); // Setup Dear ImGui style
+    
     // Setup Platform/Renderer backends
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    // Load Fonts
-    // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
-    // - AddFontFromFileTTF() will return the ImFont* so you can store it if you need to select the font among multiple.
-    // - If the file cannot be loaded, the function will return NULL. Please handle those errors in your application (e.g. use an assertion, or display an error and quit).
-    // - The fonts will be rasterized at a given size (w/ oversampling) and stored into a texture when calling ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame below will call.
-    // - Read 'docs/FONTS.md' for more instructions and details.
-    // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
-    //io.Fonts->AddFontDefault();
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
-    //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
-    //IM_ASSERT(font != NULL);
+    // Plano startup. Register nodes.
+    plano::api::SetContext(plano::api::CreateContext());
+    plano::api::Initialize();
+    
+    // Register node types.
+    plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::DoN::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
+    plano::api::RegisterNewNode(node_defs::widget_demo::PlotDemo::ConstructDefinition());
+    
+    // Load the project file
+    std::ifstream inf("nodos_project.txt");
+    std::stringstream ssbuf;
+    ssbuf << inf.rdbuf();
+    std::string sbuf = ssbuf.str();
+    size_t load_size = sbuf.size();
+    plano::api::LoadNodesAndLinksFromBuffer(load_size, sbuf.c_str());
 
     // Variables to track sample window behaviors
     bool show_demo_window = true;
     bool show_another_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-    // Plano startup. Register nodes. 
-    Init();
-
+    
     // Main draw loop
     bool done = false;
     while (!done)
@@ -353,8 +288,8 @@ int main(int, char**)
     } // End of draw loop.  Shutdown requested beyond here...
 
     // Write save file
-    size_t size;
-    char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&size);
+    size_t save_size;
+    char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&save_size);
     // Save "size" count characters from "cbuffer" to a file.
     FILE* bl;
     bl = fopen("nodos_project.txt","w");
@@ -363,7 +298,7 @@ int main(int, char**)
         printf("failed to open save-file to save project.\n");
         return -1;
     }
-    fwrite(cbuffer, sizeof(char), size, bl);
+    fwrite(cbuffer, sizeof(char), save_size, bl);
     delete cbuffer;
 
     // Cleanup
