@@ -38,8 +38,8 @@ std::unordered_map<GLuint, nodos_texture> texture_owner;
 #include "node_defs/widget_demo.h"
 
 
-// Implement Plano Callbacks
-ImTextureID plano::api::Application_LoadTexture(const char* path)
+// Implement Callbacks
+ImTextureID NodosLoadTexture(const char* path)
 {   
     // Texture metadata like height/width & layer count.
     nodos_texture meta_tex; 
@@ -73,7 +73,7 @@ ImTextureID plano::api::Application_LoadTexture(const char* path)
     return (ImTextureID)GlTextureId;
 }
 
-void plano::api::Application_DestroyTexture(ImTextureID texture)
+void NodosDestroyTexture(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)(size_t)texture;
@@ -85,7 +85,7 @@ void plano::api::Application_DestroyTexture(ImTextureID texture)
     texture_owner.erase(gid);
 }
 
-unsigned int plano::api::Application_GetTextureWidth(ImTextureID texture)
+unsigned int NodosGetTextureWidth(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)(size_t)texture;
@@ -95,7 +95,7 @@ unsigned int plano::api::Application_GetTextureWidth(ImTextureID texture)
 
 }
 
-unsigned int plano::api::Application_GetTextureHeight(ImTextureID texture)
+unsigned int NodosGetTextureHeight(ImTextureID texture)
 {
     //restore our GLuint from our void*
     GLuint gid = (GLuint)(size_t)texture;
@@ -184,9 +184,19 @@ int main(int, char**)
     ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    // Plano startup. Register nodes.
-    plano::api::SetContext(plano::api::CreateContext());
-    plano::api::Initialize();
+    // Plano Initialization
+    plano::types::ContextCallbacks cbk;           // Callback Setup
+    cbk.LoadTexture = NodosLoadTexture;           // Fill in the function pointers with our callbacks defined before main().
+    cbk.DestroyTexture = NodosDestroyTexture;     // This fills in the address of NodosDestroyTexture()
+    cbk.GetTextureHeight = NodosGetTextureHeight; // ...
+    cbk.GetTextureWidth = NodosGetTextureWidth;
+    
+    // CreateContext implicitly calls SetContext if there isn't a context set already.
+#ifdef __APPLE__
+    plano::api::CreateContext(cbk, "/Users/crolando/Code/plano/data/");
+#else
+    plano::api::CreateContext(cbk, "../plano/data/");
+#endif
     
     // Register node types.
     plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
