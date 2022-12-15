@@ -79,6 +79,7 @@
 		3779BAA82936B87600AD8A46 /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_tables.cpp; path = "../imgui-node-editor/external/imgui/imgui_tables.cpp"; sourceTree = "<group>"; };
 		3779BAA92936B87600AD8A46 /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_widgets.cpp; path = "../imgui-node-editor/external/imgui/imgui_widgets.cpp"; sourceTree = "<group>"; };
 		3779BAAA2936B87600AD8A46 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_draw.cpp; path = "../imgui-node-editor/external/imgui/imgui_draw.cpp"; sourceTree = "<group>"; };
+		377E7442294A0543005615E4 /* internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = internal.h; path = ../plano/include/internal/internal.h; sourceTree = "<group>"; };
 		37E92CAF29466EB8000C77AB /* imgui_node_editor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui_node_editor.h; path = "../imgui-node-editor/imgui_node_editor.h"; sourceTree = "<group>"; };
 		37F0DB0F2941655800DC7360 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = ../plano/include; sourceTree = "<group>"; };
 		37F0DB1029417F3900DC7360 /* imgui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = imgui.h; path = "../imgui-node-editor/external/imgui/imgui.h"; sourceTree = "<group>"; };
@@ -98,6 +99,7 @@
 		3779BA60292E7D1500AD8A46 = {
 			isa = PBXGroup;
 			children = (
+				377E7442294A0543005615E4 /* internal.h */,
 				37F0DB0F2941655800DC7360 /* include */,
 				3779BA7A2933A57700AD8A46 /* node_defs */,
 				3779BA832936B54E00AD8A46 /* attribute.cpp */,
