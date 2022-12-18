@@ -191,15 +191,20 @@ int main(int, char**)
     cbk.GetTextureHeight = NodosGetTextureHeight; // ...
     cbk.GetTextureWidth = NodosGetTextureWidth;
     
-    // CreateContext implicitly calls SetContext if there isn't a context set already.
+    // CreateContexts
+    plano::types::ContextData* context_a,* context_b;
 #ifdef __APPLE__
-    plano::api::CreateContext(cbk, "/Users/crolando/Code/plano/data/");
+    context_a = plano::api::CreateContext(cbk, "/Users/crolando/Code/plano/data/");
+    context_b = plano::api::CreateContext(cbk, "/Users/crolando/Code/plano/data/");
 #else
-    plano::api::CreateContext(cbk, "../plano/data/");
+    context_a = plano::api::CreateContext(cbk, "../plano/data/");
+    context_b = plano::api::CreateContext(cbk, "../plano/data/");
 #endif
     
+    // Setup context_a...
+    plano::api::SetContext(context_a);
+    
     // Register node types.
-    plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
@@ -207,17 +212,20 @@ int main(int, char**)
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
+    
+    plano::api::SetContext(context_b);
+    plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::PlotDemo::ConstructDefinition());
     
-    // Load the project file
-    std::ifstream inf("nodos_project.txt");
-    std::stringstream ssbuf;
-    ssbuf << inf.rdbuf();
-    std::string sbuf = ssbuf.str();
-    size_t load_size = sbuf.size();
-    plano::api::LoadNodesAndLinksFromBuffer(load_size, sbuf.c_str());
+//    // Load the project file
+//    std::ifstream inf("nodos_project.txt");
+//    std::stringstream ssbuf;
+//    ssbuf << inf.rdbuf();
+//    std::string sbuf = ssbuf.str();
+//    size_t load_size = sbuf.size();
+//    plano::api::LoadNodesAndLinksFromBuffer(load_size, sbuf.c_str());
 
     // Variables to track sample window behaviors
     bool show_demo_window = true;
@@ -249,8 +257,16 @@ int main(int, char**)
         ImGui::NewFrame();
 
         // 1. Show the plano node graph window
+        plano::api::SetContext(context_a);
+        ImGui::Begin("Graph A");
         plano::api::Frame();
-
+        ImGui::End();
+        
+        plano::api::SetContext(context_b);
+        ImGui::Begin("Graph B");
+        plano::api::Frame();
+        ImGui::End();
+        
         // 2. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
