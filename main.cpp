@@ -193,13 +193,8 @@ int main(int, char**)
     
     // CreateContexts
     plano::types::ContextData* context_a,* context_b;
-#ifdef __APPLE__
-    context_a = plano::api::CreateContext(cbk, "/Users/crolando/Code/plano/data/");
-    context_b = plano::api::CreateContext(cbk, "/Users/crolando/Code/plano/data/");
-#else
     context_a = plano::api::CreateContext(cbk, "../plano/data/");
     context_b = plano::api::CreateContext(cbk, "../plano/data/");
-#endif
     
     // Setup context_a...
     plano::api::SetContext(context_a);
