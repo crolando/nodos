@@ -192,15 +192,15 @@ int main(int, char**)
     cbk.GetTextureHeight = NodosGetTextureHeight; // ...
     cbk.GetTextureWidth = NodosGetTextureWidth;
     
-    // CreateContexts
-    plano::types::ContextData* context_a,* context_b;
+    // Create a plano context
+    plano::types::ContextData* context_a;
     context_a = plano::api::CreateContext(cbk, "../plano/data/");
-    context_b = plano::api::CreateContext(cbk, "../plano/data/");
     
-    // Setup context_a...
+    // Make context_a the "active context"
+    // Note: you can have multple contexts. All plano::api calls after a "SetContext" affect that "active" context.
     plano::api::SetContext(context_a);
     
-    // Register node types.
+    // Register node types to the context that is "active"
     plano::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::Branch::ConstructDefinition());
@@ -208,15 +208,12 @@ int main(int, char**)
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
-    load_project_file("nodos_project_a.txt");
-    
-    plano::api::SetContext(context_b);
     plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::PlotDemo::ConstructDefinition());
-    load_project_file("nodos_project_b.txt");
-
+    load_project_file("nodos_project.txt"); // deserialize a project into this context (uses the nodes that were registered)
+    
     // Variables to track sample window behaviors
     bool show_demo_window = true;
     bool show_another_window = false;
@@ -246,16 +243,8 @@ int main(int, char**)
         ImGui_ImplSDL2_NewFrame(window);
         ImGui::NewFrame();
 
-        // 1. Show the plano node graph window
-        plano::api::SetContext(context_a);
-        ImGui::Begin("Graph A");
+        // 1. Show the active plano node graph window context
         plano::api::Frame();
-        ImGui::End();
-        
-        plano::api::SetContext(context_b);
-        ImGui::Begin("Graph B");
-        plano::api::Frame();
-        ImGui::End();
         
         // 2. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
@@ -303,11 +292,8 @@ int main(int, char**)
         SDL_GL_SwapWindow(window);
     } // End of draw loop.  Shutdown requested beyond here...
 
-    // Write save file
-    plano::api::SetContext(context_a);
+    // Write save file from active context
     save_project_file("nodos_project_a.txt");
-    plano::api::SetContext(context_b);
-    save_project_file("nodos_project_b.txt");
     
 
     // Cleanup
