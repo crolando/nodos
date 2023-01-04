@@ -18,8 +18,9 @@
     #include "GL/glew.h" // must be included before opengl
     #include <SDL_opengl.h>
 #endif
+
 #include <plano_api.h>
-#include <fstream>
+#include "save_load_file.h"
 #define STB_IMAGE_IMPLEMENTATION // image loader needs this...
 #include "internal/stb_image.h"
 
@@ -207,20 +208,14 @@ int main(int, char**)
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SetTimer::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::SingleLineTraceByChannel::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::PrintString::ConstructDefinition());
+    load_project_file("nodos_project_a.txt");
     
     plano::api::SetContext(context_b);
     plano::api::RegisterNewNode(node_defs::import_animal::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::PlotDemo::ConstructDefinition());
-    
-//    // Load the project file
-//    std::ifstream inf("nodos_project.txt");
-//    std::stringstream ssbuf;
-//    ssbuf << inf.rdbuf();
-//    std::string sbuf = ssbuf.str();
-//    size_t load_size = sbuf.size();
-//    plano::api::LoadNodesAndLinksFromBuffer(load_size, sbuf.c_str());
+    load_project_file("nodos_project_b.txt");
 
     // Variables to track sample window behaviors
     bool show_demo_window = true;
@@ -309,18 +304,11 @@ int main(int, char**)
     } // End of draw loop.  Shutdown requested beyond here...
 
     // Write save file
-    size_t save_size;
-    char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&save_size);
-    // Save "size" count characters from "cbuffer" to a file.
-    FILE* bl;
-    bl = fopen("nodos_project.txt","w");
-    if (!bl)
-    {
-        printf("failed to open save-file to save project.\n");
-        return -1;
-    }
-    fwrite(cbuffer, sizeof(char), save_size, bl);
-    delete cbuffer;
+    plano::api::SetContext(context_a);
+    save_project_file("nodos_project_a.txt");
+    plano::api::SetContext(context_b);
+    save_project_file("nodos_project_b.txt");
+    
 
     // Cleanup
     ImGui_ImplOpenGL3_Shutdown();
