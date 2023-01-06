@@ -212,7 +212,7 @@ int main(int, char**)
     plano::api::RegisterNewNode(node_defs::widget_demo::BasicWidgets::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::TreeDemo::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::widget_demo::PlotDemo::ConstructDefinition());
-    load_project_file("nodos_project.txt"); // deserialize a project into this context (uses the nodes that were registered)
+    load_project_file("nodos_project_a.txt"); // deserialize a project into this context (uses the nodes that were registered)
     
     // Variables to track sample window behaviors
     bool show_demo_window = true;
@@ -297,6 +297,7 @@ int main(int, char**)
     
 
     // Cleanup
+    plano::api::DestroyContext(context_a);
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
