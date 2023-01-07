@@ -15,7 +15,7 @@ Nodos also depends on these source repos:
 - [plano](https://github.com/crolando/plano) - sources from github
 
 ## Windows Installation Instructions
-1. Manually ownload the four dependencies and nodos, and unzip them into sibling folders named and positioned like this:
+1. Manually download the four dependencies and nodos, and unzip them into sibling folders named and positioned like this:
 ![example_node_siblings](https://user-images.githubusercontent.com/1946494/201422130-b5e0532f-9ac7-446f-b60d-7fe183df0702.jpg)
 2. Open the nodos/nodos.vcxproj in Visual Studio 2019
 3. Open the nodos project, and set the Coniguration Properties > Debugging > Environment line to read like this:
