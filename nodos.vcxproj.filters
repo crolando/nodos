@@ -481,5 +481,8 @@
     <ClInclude Include="..\plano\include\plano_properties.h">
       <Filter>Header Files\plano</Filter>
     </ClInclude>
+    <ClInclude Include="draw_triangle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
