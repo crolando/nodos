@@ -22,6 +22,7 @@ void load_project_file(const char *file_address)
     std::string sbuf = ssbuf.str();
     size_t load_size = sbuf.size();
     plano::api::LoadNodesAndLinksFromBuffer(load_size, sbuf.c_str());
+    
 }
 
 // Save project function
@@ -33,14 +34,15 @@ int save_project_file(const char *file_address)
     char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&save_size);
     // Save "size" count characters from "cbuffer" to a file.
     FILE* bl;
-    bl = fopen(file_address,"w");
+    errno_t err = fopen_s(&bl, file_address, "w");
     if (!bl)
     {
-        printf("failed to open save-file to save project.\n");
+        fprintf(stderr, "cannot open file '%s': %s\n", bl, strerror(err));
         return -1;
     }
     fwrite(cbuffer, sizeof(char), save_size, bl);
     delete cbuffer;
+    fclose(bl);
     return 0;
 }
 
