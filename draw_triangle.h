@@ -12,6 +12,21 @@
 #include <SDL_opengl.h>
 #endif
 
+const char* EnumToErrorStringGL(GLenum glErr)
+{
+    switch (glErr)
+    {
+    case GL_NO_ERROR: return "GL_NO_ERROR"; break;
+    case GL_INVALID_ENUM: return "GL_INVALID_ENUM"; break;
+    case GL_INVALID_VALUE: return "GL_INVALID_VALUE"; break;
+    case GL_INVALID_OPERATION: return "GL_INVALID_OPERATION"; break;
+    case GL_INVALID_FRAMEBUFFER_OPERATION: return "GL_INVALID_FRAMEBUFFER_OPERATION"; break;
+    case GL_OUT_OF_MEMORY: return "GL_OUT_OF_MEMORY"; break;
+    case GL_STACK_UNDERFLOW: return "GL_STACK_UNDERFLOW"; break;
+    case GL_STACK_OVERFLOW: return "GL_STACK_OVERFLOW"; break;
+    }
+}
+
 #define printOpenGLError() printOglError(__FILE__, __LINE__)
 int printOglError(const char *file, int line)
 {
@@ -23,12 +38,12 @@ int printOglError(const char *file, int line)
     
     glErr = glGetError();
     if (glErr == GL_NO_ERROR) {
-        printf("No glError in file %s @ line %d: %s\n", file, line, gluErrorString(glErr));
+        printf("No glError in file %s @ line %d: %s\n", file, line, EnumToErrorStringGL(glErr));
         return retCode;
     }
     while (glErr != GL_NO_ERROR)
     {
-        printf("glError in file %s @ line %d: %s\n", file, line, gluErrorString(glErr));
+        printf("glError in file %s @ line %d: %s\n", file, line, EnumToErrorStringGL(glErr));
         retCode = 1;
         glErr = glGetError();
     }
