@@ -129,12 +129,12 @@ int main(int, char**)
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
     #elif defined(__APPLE__)
-    // GL 3.2 Core + GLSL 150
-    const char* glsl_version = "#version 150";
+    // M1 era: GL 4.1 + GLSL 410
+    const char* glsl_version = "#version 410";
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG); // Always required on Mac
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
     #else
     // GL 3.0 + GLSL 130
     const char* glsl_version = "#version 130";
@@ -224,26 +224,30 @@ int main(int, char**)
 
     // setup for off-screen triangle rasterization
     GLint attribute_coord2d;
-    GLuint program, vbo, fbo, render_texture;
-    draw_triangle_setup(program, attribute_coord2d, vbo); // shader & buffer setup.
+    GLuint program, vbo, vao, fbo, render_texture;
+    GLsizei rtt_res_x = 256, rtt_res_y = 256; // render texture resolution
+    draw_triangle_setup(program, attribute_coord2d, vbo, vao); // shader & buffer setup.
     glGenFramebuffers(1, &fbo); // stack allocation of fbo
     glBindFramebuffer(GL_FRAMEBUFFER, fbo); // attach to state machine    
     glGenTextures(1, &render_texture); // stack allocation of render_texture
     glBindTexture(GL_TEXTURE_2D, render_texture); // attach to state machine
 
     // instantiate object & assign to GL_TEXTURE_2D
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 256, 256, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rtt_res_x, rtt_res_y, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); // filtering
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); // filtering
 
     // Configure framebuffer.  Important: Render textures and FBOs are not the same.
+    // This is a little cryptic, because fbo is acted upon, but it doesn't appear in the arument list (state machine behavior)
     // This command says "given the state, attach render_texture to fbo's GL_Color_Attachament0 slot"
     // First argument: render_texture is read/write
     // Second argument: render_texture attaches to attachment0 point
     // third arguement: render_texture's variable
     // fourth argument: mip map level
-    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, render_texture, 0); 
-    glDrawBuffer(GL_COLOR_ATTACHMENT0);  // Says which attachment point to render to (later)
+    glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, render_texture, 0); //
+    glDrawBuffer(GL_COLOR_ATTACHMENT0);  // Color attachments are interesting. For forward rendering, you just use one.
+                                         // But an example of multple color attachments is building the G buffer with one draw call
+                                         // in deferred rendering.
 
     // Always check that our framebuffer is ok
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -272,11 +276,13 @@ int main(int, char**)
 
         // Render Triangle ~~~~
         
+        glUseProgram(program); // Use our shader.
         // Render to our framebuffer
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-        glViewport(0, 0, 256, 256);                 
+        glViewport(0, 0, rtt_res_x, rtt_res_y);
         glClear(GL_COLOR_BUFFER_BIT);
         glEnableVertexAttribArray(attribute_coord2d);
+        glBindVertexArray(vao);
         glDrawArrays(GL_TRIANGLES, 0, 3);
         glDisableVertexAttribArray(attribute_coord2d);
         
@@ -317,7 +323,7 @@ int main(int, char**)
             ImGui::Text("counter = %d", counter);
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::Image((ImTextureID)render_texture, ImVec2(256, 256));
+            ImGui::Image((ImTextureID)render_texture, ImVec2(rtt_res_x, rtt_res_y));
             ImGui::End();
         }
 
