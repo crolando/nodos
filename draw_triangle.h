@@ -77,7 +77,7 @@ static const GLchar* fragment_shader_source_410 =
 "out vec4 outputF; //Note the omission of a \"location\" requires c++ call to glBindFragDataLocation\n"
 "void main()\n"
 "{\n"
-"    outputF = vec4(1.0, 1.0, 1.0, 1.0);\n"
+"    outputF = vec4(0.1, 0.2, 0.4, 1.0);\n"
 "}\n";
 
 
