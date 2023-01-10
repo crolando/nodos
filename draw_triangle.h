@@ -25,6 +25,7 @@ const char* EnumToErrorStringGL(GLenum glErr)
     case GL_STACK_UNDERFLOW: return "GL_STACK_UNDERFLOW"; break;
     case GL_STACK_OVERFLOW: return "GL_STACK_OVERFLOW"; break;
     }
+    return "";
 }
 
 #define printOpenGLError() printOglError(__FILE__, __LINE__)
