@@ -34,6 +34,7 @@ int save_project_file(const char *file_address)
     char* cbuffer  = plano::api::SaveNodesAndLinksToBuffer(&save_size);
     auto ofs = std::ofstream(file_address);
     ofs << std::string(cbuffer);
+    delete cbuffer;
     return 0;
 }
 
