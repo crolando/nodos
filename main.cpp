@@ -200,6 +200,14 @@ int main(int, char**)
     // Note: you can have multple contexts. All plano::api calls after a "SetContext" affect that "active" context.
     plano::api::SetContext(context_a);
     
+    // setup fonts.
+    ImFontConfig font_config;
+    font_config.OversampleH = 1; // FreeType does not support those, reset so stb_truetype will produce similar results
+    font_config.OversampleV = 1;
+
+    auto font_a = io.Fonts->AddFontFromFileTTF("DroidSansMonoSlashed.ttf", 18.0f, &font_config);
+    font_a->Scale = 1.0f;
+    
     // Register node types to the context that is "active"
     plano::api::RegisterNewNode(node_defs::blueprint_demo::InputActionFire::ConstructDefinition());
     plano::api::RegisterNewNode(node_defs::blueprint_demo::OutputAction::ConstructDefinition());
