@@ -202,8 +202,8 @@ int main(int, char**)
     
     // setup fonts.
     ImFontConfig font_config;
-    font_config.OversampleH = 1; // FreeType does not support those, reset so stb_truetype will produce similar results
-    font_config.OversampleV = 1;
+    font_config.OversampleH = 2; // FreeType does not support those, reset so stb_truetype will produce similar results
+    font_config.OversampleV = 2;
 
     auto font_a = io.Fonts->AddFontFromFileTTF("DroidSansMonoSlashed.ttf", 18.0f, &font_config);
     font_a->Scale = 1.0f;
